@@ -1,0 +1,559 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r, include=FALSE}
+options(tinytex.verbose = TRUE)
+```
+
+---
+title: "Programming Exercise"
+author: "Alex Mutebe MSc. Data Science"
+date: "15 June 2023"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+---
+### _____________________________________________________________________________________________
+## Part 1: 
+#### Exploratory analysis
+```{r, include=FALSE}
+library(tidyverse)
+setwd("D:/SCHULE/visualisation/jun24_assignment")
+```
+
+
+### importing marketing data from a csv file into R studio
+```{r ImportingData}
+m_date <- read.csv("MMA marketing_data_sample.csv",header = TRUE)
+```
+### Getting started with Data Pre-porcessing
+-  Add necessary libraries, particularly tidyverse, for processing and visualizing data
+```{r,echo=TRUE}
+#Import the tidyverse package for data visualisation and wrangling
+library(tidyverse)
+library(corrplot)
+```
+
+## Exploratory Data Analysis
+```{r top10rows, echo=TRUE}
+#Checking in with the first 10 records
+knitr:: kable(
+m_date[1:10,], caption = "10 row preview of the marketing data subset"
+)
+```
+
+### Base R sampling of 10 entries from the dataset
+```{r}
+knitr:: kable(
+sampled <- m_date[sample(1:nrow(m_date), 10), ], caption = "Sampling 10 records" ) 
+
+```
+
+### Data formats for variables are examined
+```{r VariableTypes,echo=TRUE}
+
+str(m_date)
+```
+### Database structure
+- 4100 records
+- 21 Variables
+  - 5 intergers
+  - 11 categorical
+  - 2 numeric variables
+
+### Missing data
+
+```{r}
+sum(is.na(m_date))
+
+
+```
+#### Observation
+- Since the sum() function returns 0, there are no missing entries in the dataset.  
+
+
+### Converting categorical variables to factors
+- Working with factors during analysis and ML modeling is simpler. 
+
+```{r}
+m_date$job <- as.factor(m_date$job)
+m_date$marital <- as.factor(m_date$marital)
+m_date$k <- as.factor(m_date$k)
+m_date$default <- as.factor(m_date$default)
+m_date$housing <- as.factor(m_date$housing)
+m_date$loan <- as.factor(m_date$loan)
+m_date$contact <- as.factor(m_date$contact)
+m_date$month <- as.factor(m_date$month)
+m_date$day_of_week <- as.factor(m_date$day_of_week)
+m_date$poutcome <- as.factor(m_date$poutcome)
+m_date$y <- as.factor(m_date$y)
+
+```
+
+#### a sample of the dataset upon conversion
+
+```{r}
+str(m_date)
+```
+
+
+### Checking the distribution and presence of outliers
+- Descriptive statistics and data visualization  
+- EDA, or exploratory data analysis
+
+
+#### Age
+-  Using a box plot to see outliers
+```{r}
+
+boxplot(m_date$age)
+```
+```{r}
+ggplot(m_date,mapping = aes(age)) + geom_histogram(binwidth = 5)
+
+```
+
+
+```{r, echo=TRUE}
+
+summary(m_date$age)
+```
+- A box plot, according to Mike (2021), employs boxes and lines to show how the distributions of one or more sets of numerical data. To visualize the differences between the variable features of categorical and continuous data types, bar charts and histograms can be combined (Indratmo et al., 2014).
+- Observation
+  - About 50% of the age distribution falls between 32 and 47, according to the boxplot. 
+  - The average age is 40.
+  - After age 75, there have been several observed outliers.
+  - Overall, the hitogram displays a normal age distribution. 
+
+
+### Duration
+```{r}
+boxplot(m_date$duration)
+```
+```{r}
+ggplot(m_date,mapping = aes(duration)) + geom_histogram(binwidth = 100)
+
+```
+```{r, echo=TRUE}
+
+summary(m_date$duration)
+```
+
+- Observation
+  - The boxplot shows that about 50% of the duration  ranges between 103 to 317. 
+  - The average duration is 256.8 
+  - There is an observation of some outliers after 800  
+  - A left skew in the data is visible in the histogram.
+
+
+
+```{r, echo=TRUE}
+#Summary statistics for pdays
+summary(m_date$pdays)
+```
+- Observation
+  - Abnormality in the data distribution
+  - detailed attention is needed  
+    - Both graphs show two values that are far apart i.e 0 and 1000
+
+- We notice that the pday variable is numeric 
+  - 999 represents missing values
+  - 999 values is misleading the analysis
+
+- The accuracy of machine learning models might be decreased by missing data (Tejashree, 2022). A model that has been trained with all missing values removed, in accordance with Satyam (2020), produces a robust model. 
+- The code below updates the entries containg missing values i.e 999 to missing (Na) 
+```{r}
+m_date <- mutate(m_date,pdays5 = ifelse(pdays == 999,'',pdays))
+```
+
+- Updating the pdays variable
+```{r, echo=TRUE}
+m_date$pdays <- m_date$pdays5
+```
+
+- Summary statistics 
+```{r, echo=TRUE}
+
+summary(m_date$pdays)
+```
+
+- Observation 
+  - After removing 999 value from pdays data
+    - 3940 out of 4100 records contained missing data, as we can see. 
+
+### Previous
+
+```{r}
+
+boxplot(m_date$previous)
+```
+
+```{r}
+summary(m_date$previous)
+```
+```{r}
+ggplot(m_date,mapping = aes(previous)) + geom_histogram()
+
+```
+
+- Observation
+  - The boxplot and historgram show that mostly there were no contacts performed before this campaign
+
+### cons.conf.idx consumer confidence index
+
+```{r}
+boxplot(m_date$cons.conf.idx)
+```
+```{r}
+ggplot(m_date,mapping = aes(cons.conf.idx)) + geom_histogram(binwidth = 10)
+
+```
+
+```{r}
+summary(m_date$cons.conf.idx)
+```
+- Observation
+   - the con.conf.idx contains negative values.
+
+
+- One of the best methods for handling negative numbers in data analysis transformations is the log transformation (Rick, 2011).
+    - Step 1
+        - Shifting values to positive range
+  
+```{r}
+m_date <- mutate(m_date,shifted_cons.conf.idx = m_date$cons.conf.idx - min(m_date$cons.conf.idx) + 1)
+```
+
+- Applying log transformation using log()
+```{r}
+
+m_date <- mutate(m_date,log_cons.conf.idx = log(m_date$shifted_cons.conf.idx))
+```
+
+
+```{r}
+
+summary(m_date$log_cons.conf.idx)
+```
+- Observation
+
+  - All of our values are now positive following data transformation.
+
+
+### euribor3m
+
+```{r}
+boxplot(m_date$euribor3m)
+```
+
+```{r}
+ggplot(m_date,mapping = aes(euribor3m)) + geom_histogram(binwidth = 1)
+
+```
+
+```{r}
+
+summary(m_date$euribor3m)
+```
+
+### nr.employed
+
+```{r}
+boxplot(m_date$nr.employed)
+```
+```{r}
+ggplot(m_date,mapping = aes(nr.employed)) + geom_histogram(binwidth = 100)
+
+```
+
+## Descriptive Statistics
+-  numeric variables
+
+```{r}
+
+m_date %>% summarize_if(is.numeric, mean)
+
+```
+
+- Examining the relationship between age and duration
+```{r}
+plot(age ~ duration, data = m_date, col = "dodgerblue", pch = 20, cex = 1.5,
+main = "age vs duration")
+
+```
+
+
+
+## Analysis of categorical variables
+
+```{r}
+ ggplot(m_date, mapping=(aes(y=job,fill=job))) + geom_bar() 
+```
+```{r}
+ ggplot(m_date, mapping=(aes(x=marital,fill=marital))) + geom_bar() 
+```
+```{r}
+ggplot(m_date, mapping=(aes(y=k,fill=k))) + geom_bar() 
+```
+
+```{r}
+ggplot(m_date, mapping=(aes(y=k,fill=k))) + geom_bar() 
+```
+
+- K
+```{r}
+ summary(m_date$k)
+```
+- Observation
+   -  most clients have a level of university education
+   -  1 record of illiterate customers
+      - The record will be eliminated to ensure reliable and accurate model estimation.
+
+
+```{r, echo=TRUE}
+
+m_date2 <- subset(m_date, k!="illiterate")
+
+```
+### Housing 
+```{r}
+ggplot(m_date, mapping=(aes(x=housing,fill=housing))) + geom_bar() 
+```
+
+```{r}
+summary(m_date$housing)
+```
+### loan 
+```{r}
+ggplot(m_date, mapping=(aes(x=loan,fill=loan))) + geom_bar() 
+```
+
+```{r}
+summary(m_date$loan)
+```
+
+### loan contact 
+```{r}
+ggplot(m_date, mapping=(aes(x=contact,fill=contact))) + geom_bar() 
+```
+
+```{r}
+summary(m_date$contact)
+```
+- Observation
+   -  The graph demonstrates that there were more cellular customer contacts.
+
+### loan month
+```{r}
+ggplot(m_date, mapping=(aes(x=month,fill=month))) + geom_bar() 
+```
+
+- Observation
+   - The month of May saw the most contacts. 
+   - Decembar saw the fewest contacts made overall.
+
+
+```{r, echo=TRUE}
+summary(m_date$month)
+```
+
+
+### loan day_of_week
+```{r}
+ggplot(m_date, mapping=(aes(x=day_of_week,fill=day_of_week))) + geom_bar() 
+```
+```{r, echo=TRUE}
+summary(m_date$day_of_week)
+```
+- Observation
+   - Normal distribution of numbers throughout the week on all days 
+
+
+## Part 2 Statistical modelling
+- The strength and direction of correlations between variables can be examined using a correlation matrix (Giuseppe, 2022).
+```{r}
+
+mm_cor_matrix <- select_if(m_date, is.numeric)
+
+# Compute the correlation matrix
+cor_matrix <- cor(mm_cor_matrix)
+
+# Plot the correlation matrix
+corrplot(cor_matrix, method = "color", type = "lower", tl.cex = 1)
+```
+
+- Observation
+    - Multicollinearity  can be observed in redundant columns created during data pre-procesing
+     
+- shifted_cons.conf.idx,cons.conf.idx & pdays5 will be dropped
+```{r}
+#final_mm_dataset <- select(m_date,-c(shifted_cons.conf.idx,pdays5,cons.conf.idx,marital,poutcome))
+final_mm_dataset <- select(m_date,-c(shifted_cons.conf.idx,pdays5,cons.conf.idx))
+
+
+```
+
+```{r}
+
+df <- select_if(final_mm_dataset, is.numeric)
+
+# Compute the correlation matrix
+mm_cor_matrix <- cor(df)
+
+# Plot the correlation matrix
+corrplot(mm_cor_matrix, method = "color", type = "lower", tl.cex = 1)
+```
+
+### logistic modeling
+- Note that we are using logisitic regression  because our outcome is binary i.e yes or no
+```{r}
+library(caret)
+```
+
+- Spliting the dataset into a train set and a test set
+```{r fitting_a_logistic_model, echo=TRUE}
+
+set.seed(350)
+#partitioning the dataset i.e  70% train set and 30% for test set
+mm_train = createDataPartition(y = final_mm_dataset$y, times = 1, p = 0.7, list = FALSE)
+
+```
+- Defining the training and testing datasets
+```{r}
+train_set = slice(final_mm_dataset, mm_train)
+test_set = slice(final_mm_dataset, -mm_train)
+```
+
+- Creating a logistic regression model
+```{r}
+model <- glm(y ~ ., data = train_set, family = binomial)
+
+# Print the summary of the model
+summary(model)
+
+```
+
+- Making predictions on the test set
+```{r}
+predictions <- predict(model, newdata = test_set, type = "response")
+
+```
+
+- Convert predictions to binary values (0 or 1) using a threshold of 0.5
+```{r}
+
+binary_predictions <- ifelse(predictions > 0.5, "yes", "no")
+
+```
+- Confusion matrix for the logisitic model
+```{r}
+
+heart_glm <- confusionMatrix(data = as.factor(binary_predictions), reference = as.factor(test_set$y), positive = "yes")
+
+```
+```{r}
+heart_glm
+```
+
+- ROC construction using probabilities
+```{r}
+library(pROC)
+roc_GLM <- roc(test_set$y, predictions)
+print(roc_GLM)
+plot(roc_GLM)
+```
+
+### Decision tree
+```{r}
+library(rpart)
+library(rpart.plot)
+```
+
+```{r}
+decision_trees_mm <- rpart(y ~ ., data = train_set, method = "class")
+
+predict_decisiontrees <- predict(decision_trees_mm, newdata = test_set, type = c("class"))
+
+```
+- Confusion matrix for the decision tree model
+```{r}
+mm_DecisionTree <- confusionMatrix(data = as.factor(predict_decisiontrees), reference = as.factor(test_set$y), positive = "yes")
+```
+
+```{r}
+rpart.plot(decision_trees_mm)
+```
+
+
+-  Observation
+   - The model considered duration for constructing the root node
+     - to get a yes at 2% rate  
+       - duration  is less than 807
+       - nr.employed at more than 5088
+       - pdays  in within the 1^st^ day or between 9 and 17 days after the client was last contacted from a previous campaign
+
+
+- Decision tree model's confusion matrix
+```{r}
+mm_DecisionTree
+
+```
+
+- Building the ROC for the decision tree
+```{r}
+
+decision_tree.preds <- predict(decision_trees_mm, test_set, type="prob")[, 2]
+decision_tree <- roc(test_set$y, decision_tree.preds)
+print(decision_tree)
+plot(decision_tree)
+```
+
+
+### Conclusion. 
+
+- AUC is used to compare the performance of the two classifiers.  Rahul (2019) suggests the AUC as the best statistic to support the bank's telemarketing campaigns in our scenario of the MMA Marketing campaign.
+
+    - Logisitic model
+        - AUC = 0.9101
+        
+    - Decision tree
+        - AUC = 0.8459
+        
+- Both models have close values, however the logistic model performed better at predicting the outcome of a phone call to sell long-term bank deposits (area under the curve: 0.9101 vs. 0.8459) than the decision tree.
+
+
+
+
+#### References:
+
+  - Mike, Y. (2021) A Complete Guide to Box Plots. CHARTIO. Available from: 
+https://chartio.com/learn/charts/box-plot-complete-guide/ [Accessed on 27 May 2023]
+
+  - Indratmo, L., Joyce, B., Ben, D. (2014) The efficacy of stacked bar charts in supporting single attribute and overall-attribute comparisons, Science Direct. Available from:
+https://www.sciencedirect.com/science/article/pii/S2468502X18300287 [Accessed on 18 June 
+2023]
+
+  - Satyam, K. (2020) 7 Ways to Handle Missing Values in Machine Learning. Towards Data Science Available from: 
+https://towardsdatascience.com/7-ways-to-handle-missing-values-in-machine-learning-1a6326adf79e/ [Accessed on 20 June 2023]
+
+
+  - Tejashree, N. (2022) How to deal with Missing Values in Machine Learning. Geek Culture Available from: 
+https://medium.com/geekculture/how-to-deal-with-missing-values-in-machine-learning-98e47f025b9c/ [Accessed on 22 June 2023]
+
+  - Rick, W. (2011) Log transformations: How to handle negative data values? sas Blogs Available from: 
+https://blogs.sas.com/content/iml/2011/04/27/log-transformations-how-to-handle-negative-data-values.html/ [Accessed on 15 June 2023]
+
+  - Giuseppe, M. (2022) Correlation Matrix, Demystified. Correlation matrix: what is, how is it built and what is it used for Towards Data Science Available from: 
+https://towardsdatascience.com/correlation-matrix-demystified-3ae3405c86c1 [Accessed on 19 June 2023]
+
+
+  - Rahul, A. (2019) The 5 Classification Evaluation metrics every Data Scientist must know Available from: 
+https://towardsdatascience.com/the-5-classification-evaluation-metrics-you-must-know-aa97784ff226 [Accessed on 20 June 2023]
+
+
+
+

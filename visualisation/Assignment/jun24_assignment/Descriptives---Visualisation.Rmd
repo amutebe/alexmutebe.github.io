@@ -1,0 +1,197 @@
+---
+title: "Visualisation Assignment"
+author: "Alex"
+date: "15 June 2023"
+output: html_document
+---
+```{r, include=FALSE}
+library(tidyverse)
+setwd("D:/SCHULE/visualisation/jun24_assignment")
+```
+## Importing CSV marketing Data
+```{r ImportingCSV}
+m_date <- read.csv("MMA marketing_data_sample.csv",header = TRUE)
+```
+# Getting started with Data Pre-porcessing 
+
+# Exploratory Data Analysis
+```{r top10rows, echo=FALSE}
+#Checking in with the first 10 records
+m_date[1:10,]
+```
+
+```{r DataStructure}
+#Structure of the dataset
+str(m_date)
+```
+####  Check for missing values in the dataset
+
+```{r}
+sum(is.na(m_date))
+
+
+```
+
+
+
+###Checking for outliers
+
+```{r}
+#Box plot for visualising outliers
+boxplot(m_date$age)
+#ggplot(m_date,mapping = aes(age)) + geom_boxplot()
+
+```
+
+```{r}
+boxplot(m_date$duration)
+```
+
+```{r}
+boxplot(m_date$pdays)
+```
+#### Removing the 999 number 
+```{r}
+m_date <- mutate(m_date,pdays5 = ifelse(pdays == 999,'',pdays))
+
+```
+
+
+```{r}
+m_date$pdays5 <- as.numeric(m_date$pdays5)
+```
+```{r}
+boxplot(m_date$pdays5)
+```
+
+
+```{r}
+#m_date <- m_date %>% select(-c('pdays3', 'pdays4'))
+m_date[0:10,]
+```
+
+```{r}
+m_date$pdays5
+```
+
+```{r}
+boxplot(m_date$pdays5)
+hist(m_date$pdays5)
+summary(m_date$pdays5)
+```
+
+```{r}
+boxplot(m_date$duration)
+boxplot(m_date$previous)
+boxplot(m_date$cons.conf.idx)
+boxplot(m_date$euribor3m)
+boxplot(m_date$nr.employed)
+```
+```{r}
+hist(m_date$previous)
+```
+
+
+## Summarising Data
+
+```{r}
+#Numeric values statistics
+m_date %>% summarize_if(is.numeric, mean)
+
+```
+## Converting string variables to levels
+
+```{r}
+m_date$job <- as.factor(m_date$job)
+m_date$marital <- as.factor(m_date$marital)
+m_date$k <- as.factor(m_date$k)
+m_date$default <- as.factor(m_date$default)
+m_date$housing <- as.factor(m_date$housing)
+m_date$loan <- as.factor(m_date$loan)
+m_date$contact <- as.factor(m_date$contact)
+m_date$month <- as.factor(m_date$month)
+m_date$day_of_week <- as.factor(m_date$day_of_week)
+m_date$day_of_week <- as.factor(m_date$day_of_week)
+m_date$poutcome <- as.factor(m_date$poutcome)
+m_date$y <- as.factor(m_date$y)
+m_date$pdays2 <- as.factor(m_date$pdays)
+
+```
+
+### Preview of the dataset after conversion
+
+```{r}
+str(m_date)
+```
+#Checking for relation between age and duration
+```{r}
+plot(age ~ duration, data = m_date, col = "dodgerblue", pch = 20, cex = 1.5,
+main = "age vs duration")
+```
+
+```{r}
+pairs(m_date)
+```
+
+```{r}
+ ggplot(m_date, mapping=(aes(y=job,fill=job))) + geom_bar() 
+```
+```{r}
+ ggplot(m_date, mapping=(aes(x=marital,fill=marital))) + geom_bar() 
+```
+```{r}
+ggplot(m_date, mapping=(aes(y=k,fill=k))) + geom_bar() 
+```
+```{r}
+m_date %>%  summarise_at(c("age"),sd)
+```
+
+
+```{r}
+view(m_date)
+```
+
+### more descriptive statisticis
+```{r}
+sapply(m_date, summary)
+```
+
+### summarising data usingthe purr library
+```{r}
+library(purrr)
+
+m_date %>%  map(~summary(.))
+
+```
+### more descriptive stats
+```{r}
+
+x <- is.numeric(m_date)
+view(x)
+#summary(m_date[])
+```
+### descriptive for only numeric variables
+```{r}
+m_date_numeric <- select_if(m_date, is.numeric)  
+summary(m_date_numeric)
+```
+
+### descriptive for categorical variables
+
+```{r}
+
+m_date_categorical <- select_if(m_date, is.factor) 
+summary(m_date_categorical)
+
+```
+
+```{r}
+plot(m_date_categorical$marital)
+
+plot(m_date_categorical$day_of_week)
+```
+
+```{r}
+plot(m_date$y)
+```
+

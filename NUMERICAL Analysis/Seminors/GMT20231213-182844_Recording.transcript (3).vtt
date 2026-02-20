@@ -1,0 +1,334 @@
+WEBVTT
+
+1
+00:00:01.980 --> 00:00:05.840
+Russell Kabir: Hello, everyone! Welcome to our seminar session. 3.
+
+2
+00:00:08.660 --> 00:00:27.760
+Russell Kabir: In this seminar we'll be discussing about probabilities and p-value and trains of people and how to text decision based on P. Evalu. And then also associated with people who will be covering hypothesis testing. Then we will be doing some sample test question.
+
+3
+00:00:27.850 --> 00:00:36.309
+Russell Kabir: After going through the slides and video recording, if you have any questions, please feel free to contact me via email.
+
+4
+00:00:39.460 --> 00:00:53.260
+Russell Kabir: So probability is a measure that you know that assumes that something will happen. There is an element of uncertainty is associated with every conclusion, because
+
+5
+00:00:53.260 --> 00:01:12.869
+Russell Kabir: information off on all happenings is not available. The uncertainty is numerically expressed as probability and express as the symbol P. In statistical and the analysis we are interested in probability of the observed difference in 2 sample due to chance, due to sampling variation. And
+
+6
+00:01:12.900 --> 00:01:27.600
+Russell Kabir: so in simple what's when we toss it one? You know there is a 50 50 chance that we will get at the head of them. This is the probability theory, and based on this probability theory, we in statistics, we use this
+
+7
+00:01:27.600 --> 00:01:47.380
+Russell Kabir: P value. We use p-value to draw inference about the sample from the population. So if the p-value is greater than point 0 y. But it is customary to accept that the difference is due to be chance late which is due to sampling variation
+
+8
+00:01:47.380 --> 00:01:52.639
+the observ difference in the samples under this condition is said to be statistically not
+
+9
+00:01:52.740 --> 00:02:22.420
+Russell Kabir: s significant or insignificant. If the p-value is less or equal to point 0 5. The observed difference is considered as not due to sampling variation, but due to some difference in the samples themselves. So observed, a difference under those conditions is set to be statistically significant. So let's discuss some example. The p-value is generally is used to proof or disproof. Null hypothesis when we run a statistical test.
+
+10
+00:02:22.650 --> 00:02:34.560
+So people who had less than point 0 5 means the difference between 2 different group is significant at level of 5%, and it is considered as minimum level of significance.
+
+11
+00:02:35.110 --> 00:02:46.469
+Russell Kabir: Evalu less than point 0 one means the difference between 2 group is significant at the level of one person, it is considered as the moderate level of significance.
+
+12
+00:02:46.470 --> 00:03:06.459
+Russell Kabir: Evalu less than point 0 0 one means the difference between 2 different group is significant at level at point one person is, it's considered to be as highly significant. So this is I have presented here. But if you go through my notes, and in some books they you will see that P. If it is P value less than point 0 5, we say
+
+13
+00:03:06.640 --> 00:03:10.680
+Russell Kabir: significant, and when it is p, less than point 0 one, we say.
+
+14
+00:03:11.540 --> 00:03:39.109
+Russell Kabir:  highly significant. And when it is p, less than point 0 0 one very highly significant. Actually, you know the way you wanted to interpret it. It's fine depending on the what is that computed P value from your statistical test. So and there are so many controversy related to pivotal please don't go into that. As we are still following p-value less than point 0 5 for our you know, statistical test here.
+
+15
+00:03:39.280 --> 00:03:46.629
+So ev values are expressed at this email through E, although it may be easier to understand. What
+
+16
+00:03:46.680 --> 00:04:08.449
+Russell Kabir: if are they when you convert them to percentage. For example, P value a P value of point 0 2 5 4 means 2 per person. This means that there is 2 chance that if the results could be due to random, happen by chance. That's a very tiny amount of you know. What is it called
+
+17
+00:04:08.570 --> 00:04:33.930
+Russell Kabir: chance. On the other hand, a large P value point 0 9. Well, if you convert them into percentage, which comes to 90% means that you have 90% probability that you know that the completely random and due not due to anything in your experiment. So it means that the smaller the p-value the more is significant is the statistical results.
+
+18
+00:04:34.210 --> 00:05:00.239
+Russell Kabir: And, as I said at the beginning, generally we use p-value to make an inference about the sample and the sample is drawn from the population, and we can't generally, you know, investigate, or you can include the whole population. So we try to use sample and to make a conclusion about the sample we use P value. So here, I'm going to show some samples
+
+19
+00:05:00.240 --> 00:05:24.799
+Russell Kabir: sample data here findings. And as you can see here, then, from the title of the table, predictors of ninja State or sharp injury hospital healthcare workers. So that is the title of the table. And as you can see, there are so many predictors, one of the predictories gender the predictories, age, nationality, job title. And if you see, gender has 2 categories, age has got fiber categories, nationalities.
+
+20
+00:05:24.960 --> 00:05:43.590
+Russell Kabir: 2 categories. Job title is 4 categories. All of them are in category conformity which we are con. You know. Comparing with with a needle stick, there's a needle stick injury or not. This table is showing, and logistic regression analyzes findings, and as you can see.
+
+21
+00:05:43.780 --> 00:06:12.049
+Russell Kabir: the one we are in this regression analysis we are comparing, you know, one, which is the reference category one here represents the reference, the category. So we are comparing the female with the male. So this is the value of odds ratio. This is the value of 95% here, and this is the p value. Now, as you can see, the gender variable, which has 2 categories whether it is
+
+22
+00:06:12.050 --> 00:06:37.730
+Russell Kabir: in this model. There are 2 models. So but for your understanding, we just gonna explain one model. We can take an adjusted model now. Whether gender is associated with need to stick or sharp injury or not, based on the p-value, as you can see, it is point 0 7, which is higher than point 0 5. So we can say that no gender is not a good predictor of native or sharp injury, because it is not statistically significant.
+
+23
+00:06:37.750 --> 00:06:39.809
+Russell Kabir: And when it comes to
+
+24
+00:06:40.430 --> 00:06:55.129
+Russell Kabir: you know, age, we can see that all the age group statistically significant nationality, you know, is not significant. Physicians. What professionals
+
+25
+00:06:55.130 --> 00:07:14.870
+Russell Kabir: this one is significant. This one is significant, and this one is significant. And in the between, as you can see, this is 95%. Ci, so what is 95% ci or 95% confidence interval means 95% confidence. Main interval means that you know, when we use M, you know.
+
+26
+00:07:15.020 --> 00:07:29.960
+Russell Kabir: for statistical analysis, we use sample always. And we. whatever findings we are obtaining from the sample, we say that it is representative of the you know, the population of that particular population. So
+
+27
+00:07:29.980 --> 00:07:50.950
+Russell Kabir: and 95%. Ci means that we are 95% confident that the value that we are obtaining from the sample. It's it will be within the population range, on population limit or population parameters. So this and there will be chances of 5% error. So when the 95% ci lower limits, this is the lower limits and upper limits.
+
+28
+00:07:50.990 --> 00:08:02.460
+Russell Kabir: it crosses one. Then we say that 95% Ci is not significant. So, as we can see, the lower limit is point 9 6, and upper limit is 2.7 3. It is crossing one.
+
+29
+00:08:03.140 --> 00:08:04.719
+Russell Kabir: so it is not
+
+30
+00:08:04.800 --> 00:08:24.369
+Russell Kabir: significant. Now, if we come to the second example, where age group 26 to 30, it has got 1.4 one lower limit and upper limit is 5.9 9. Does it cross one? No, it is not crossing one. It has got value over one. So we can say that this one is
+
+31
+00:08:24.390 --> 00:08:25.660
+Russell Kabir: significant.
+
+32
+00:08:25.790 --> 00:08:35.339
+Russell Kabir: Similarly, this one doesn't cross one. This one doesn't cross one. This one doesn't cross one, so we can say it is significant. But as we can see, this one is
+
+33
+00:08:35.440 --> 00:09:03.919
+Russell Kabir: insignificant because it is crossing one. This one is crossing one. This one is crossing one this one doesn't cross one also, this one is crossing one crossing, one crossing, one crossing one. So this one doesn't cross one so significant. This doesn't cross one significant. So these are the cross one. So this is significant. So this way, we also need to mention whether 95% ci is con significant or not in our test.
+
+34
+00:09:04.380 --> 00:09:27.340
+Russell Kabir: Now, in this ordinary regression, another regression analysis sample. I'm showing you here, as you can see there, there. These are the independent variables, and whether, you know, there is an association of white meeting in urban and rural rural area we have seen this is that also, this is the 95% ci.
+
+35
+00:09:27.340 --> 00:09:42.560
+Russell Kabir: and, as you can see against the odds issue, there are some sity given. So when the acidic there is one a static case. Provided, then we can say that this is significant, because the p-value is less than point 0 5.
+
+36
+00:09:42.720 --> 00:10:12.639
+Russell Kabir: And when there are 2 aesthetic given, we can say that it is also significant because it is less than point 0 one. And when then 3 aesthetic is given, then it means less than 1 0 0 one. So here p-value is not mentioned without ma mentioning the p-value they have represent here actually stands for. If you go to the next table you can see one. A static stands for.
+
+37
+00:10:13.430 --> 00:10:38.330
+Russell Kabir: you know, 5%. Another one 2 person at 5 what is it called? Sorry 0 point 1 and another 1 0 one. So this way they have represented this pmalu, and also, as you can see here the reference category was change. In the other example, the previous example. We have the reference category.
+
+38
+00:10:38.330 --> 00:10:52.750
+Russell Kabir: first category. But here they have seen change the reference category to a highest category. So it depends on the researcher which one they wanted to use the reference category. Now, if we come to this example
+
+39
+00:10:52.750 --> 00:11:11.400
+Russell Kabir: minus point 0 5 4 2.6, this one doesn't cross one, so we can say that it is significant this one this one doesn't cross one. So it is significant this one does cross one. So it is
+
+40
+00:11:11.410 --> 00:11:38.080
+Russell Kabir: insignificant and then you can come to this one 0 and 0 point 4. This one doesn't also doesn't cross one. So it is. What is it called significant. So if the 95 persons via lower limit and upper limit is containing one, we call it in insignificant. If they are not containing one. Then we could say insignificant. For example, again.
+
+41
+00:11:38.080 --> 00:11:54.020
+Russell Kabir: 4.1 8.2 8. It doesn't contain one. So it is significant. Okay, 17.6 4 and 20.0 6. It doesn't cross one, so we can say it is significant.
+
+42
+00:11:54.320 --> 00:12:18.270
+Russell Kabir: So if you need to learn more, you can. You know, go through some literature and the notes, and you know, the recommended book to for better understanding. Now we will. Dis will be discussing about hypothesis, testing and hypothesis is a statement about one or more population. Hypothesis is mostly concerned about the population, not sample. So we you know, say.
+
+43
+00:12:19.150 --> 00:12:44.009
+Russell Kabir: the 2 types of hypothesis now, and alternative hypothesis generally, when we run statistical test, we don't need to use both of the hypotheses. We can start with one hypothesis, either now or that generally. In the research we use null hypothesis mainly just now. In in the third bullet, as you can see, I have given an example climate change and human health in the Uk. So what can be the
+
+44
+00:12:44.010 --> 00:12:58.319
+null hypothesis here? So, as I said, there is null hypothesis here. There is no impact of climate change on human health in the Uk alternative hypothesis in this case can be, that is, if you want me to write it down for you. Then
+
+45
+00:12:58.320 --> 00:13:00.300
+Russell Kabir: there is impact of
+
+46
+00:13:06.000 --> 00:13:07.690
+Russell Kabir: climate change
+
+47
+00:13:09.090 --> 00:13:10.330
+Russell Kabir: on
+
+48
+00:13:11.980 --> 00:13:28.889
+Russell Kabir: human health. India. Okay? So as you can see, this is the alternative hypothesis. So this way we will write our null and alternative hypothesis in our tastes. So whatever the problem will be given to you, based on that, you will be writing dial on alternative hypothesis.
+
+49
+00:13:38.790 --> 00:13:58.569
+Russell Kabir: So null hypothesis is the hypothesis of no difference or equality which is the null hypothesis on the alternative hypothesis but alternative also can be used if you want to. So what is the user hypothesis in statistics? So generally, when we run a statistical test,
+
+50
+00:13:58.570 --> 00:14:09.220
+Russell Kabir: we state the hypothesis, then we formulate our null and alternative hypothesis, then determine the level of significance and determine the test of statistics.
+
+51
+00:14:09.220 --> 00:14:30.950
+Russell Kabir: Then we run that the statistics, then we get that, calculate the P value and compare the P value with point 0 5 or point 0 one all point 0 0 one, and based on that, we reject or fail to reject that now hypothesis. So when the P value is less than point 0 5, we reject the null hypothesis.
+
+52
+00:14:30.950 --> 00:14:51.540
+Russell Kabir: And we can say that's that this statistic is significant if the value is greater than point 0 5 we fail to reject the non hypothesis, and we say that this statistics is insignificant. So when it is now with the hypothesis testing
+
+53
+00:14:51.540 --> 00:15:07.079
+Russell Kabir: it is, it will not be necessary to always be true or false. So when we reject them, I'll hypothesis. But it is actually true. We call it type one error, and when it is false except when it is false and
+
+54
+00:15:07.770 --> 00:15:35.339
+Russell Kabir: sorry when we are rejecting another hypothesis. When it is true, it is called a type, one error, and when it, when we are accepting the hypothesis, when it is false, which is called type 2. Error. It will not be coming in. That is just for your knowledge purpose. You need to. Or you also need to know, type on and type to your own data. Commonly associated with hypothesis testing. So again, when we are rejecting the null hypothesis when it is true. It is called
+
+55
+00:15:35.340 --> 00:15:40.499
+Russell Kabir: type one arrow, and accepting the Nile hypothesis when it is false. It is called type 2 error.
+
+56
+00:15:41.340 --> 00:16:01.359
+Russell Kabir: So you I'll be going through the mathematics days, as you know that it is, counts for 25% of the total module mark you should be submitted with at the end of Unit 7. You have one and a half hour to complete the test. And you know this is one of the sample example I wanted to show you here, as you can see.
+
+57
+00:16:02.260 --> 00:16:03.300
+Russell Kabir: sorry
+
+58
+00:16:04.980 --> 00:16:08.390
+Russell Kabir: the data set contains number of children in each.
+
+59
+00:16:08.620 --> 00:16:21.970
+Russell Kabir: 24 survey families. You need to do a frequency table and calculate the relative frequency and percentage. So this is the number that you have of that those 24 household survey families.
+
+60
+00:16:23.220 --> 00:16:45.509
+Russell Kabir: So what I have written, 0 number of children, one child household 2 children, household, 3 children, household and free, 4 children, household or families, so number no children. Household is 5, one child household families are 6, 2 households, 7, and then we have
+
+61
+00:16:45.690 --> 00:17:10.260
+Russell Kabir:  found out the, you know, divided 5, divided by 24 multi-five twin. Sorry multiplied. We found out the relative frequency, and when we have the relative frequency, you can easily convert them into percentage. So I think, this is an easy example for all of you, and you'll be able to apart from it. If this kind of example comes in the test. So once again.
+
+62
+00:17:10.260 --> 00:17:26.730
+you will have the data set like this, and then you will make a you know, frequency table, and we'll show the frequency. And then from there you can also directly click you can without calculating the relative frequency. You can also calculate the percentages if you want. Okay.
+
+63
+00:17:27.380 --> 00:17:35.419
+Russell Kabir: Now, there will be some questions from our output. You don't need to run our
+
+64
+00:17:35.420 --> 00:17:59.009
+Russell Kabir: again. You don't need to run for the mathematics test, but for you know we will be giving you the output, and then you need to write some information from this output. Now, as you, we can see that we have run 2 sample T tests. And what couldn't be the hypothesis here. So maybe we want to see that whether there is a differences of
+
+65
+00:17:59.190 --> 00:18:12.880
+Russell Kabir: you know grades between gender, male and female these 2, and II can develop my hypothesis that there is no difference of grades between male and female.
+
+66
+00:18:13.450 --> 00:18:40.600
+Russell Kabir: in in this test, in this case and alternative hypothesis that you know. There is a differences of grades among male and female. Now you can see here that T test value is given and associated with P. Value is given, and is the p-value less than point 0 1 0 one? Yes, so we can reject the null hypothesis, and we can say that
+
+67
+00:18:40.600 --> 00:18:48.580
+Russell Kabir: it is statistically significant. And there is difference of grades between male and female in this sample.
+
+68
+00:18:49.270 --> 00:19:11.639
+Russell Kabir: So that's it. So what you have to do, we will be giving you this kind of output. You have to right now an alternative hypothesis, then, based on the p-value you have to take the decision, and you have to say whether that is statistic is significant or not. As the p-value here is less than point 0 one. We say that the statistic is significant, and we reject the null hypothesis.
+
+69
+00:19:11.640 --> 00:19:30.939
+Russell Kabir: And the next question will be here 95%. Ci, as you can see, the 95% ci is minus 76 per and 2 minus 25. And this one doesn't cross one. So we can say that the 95% ci is also statistically significant. Okay.
+
+70
+00:19:31.530 --> 00:19:32.530
+Russell Kabir: I can
+
+71
+00:19:33.460 --> 00:20:01.789
+Russell Kabir: next one. As you can see, we have Prt test we have run here. Prt test is particularly used when there is a before and after scenario, and we have a situation where pre-treatment and post treatment. So we want to see which treatment is better pre treatment and post treatment. And we got the T test result 20.7 8 with a p value, 2.2 or so, it is less than point 0 one. Because
+
+72
+00:20:01.790 --> 00:20:24.909
+Russell Kabir: if you don't understand, if this kind of information comes in that means it is less than point 0 5. If you don't understand what is this actual value means because it is presented in infinity. Then you can google it and can find out. So in this case, if the p-value is less than point 0 5, and we mentioned that our null hypothesis is that
+
+73
+00:20:24.910 --> 00:20:41.940
+Russell Kabir: there is no difference between pre and post treatment. Alternative hypothesis was, there is difference between pre and post treatment, and as the p-value is less than point 0 5 in this case, we reject the null hypothesis. And we say that the statistical test is significant.
+
+74
+00:20:41.940 --> 00:21:00.589
+Russell Kabir: And also if you see the 95% ci, it is 5.5 9 lower limit and upper limit is 6.7 5, which doesn't contain one. So the 95% ci is also showing it is significant. Okay, so few things you need to remember from here. Guys.
+
+75
+00:21:00.860 --> 00:21:01.930
+Russell Kabir: okay.
+
+76
+00:21:01.940 --> 00:21:07.340
+Russell Kabir: one payity test is used when there is a before after situation
+
+77
+00:21:07.520 --> 00:21:09.249
+Russell Kabir: move number 2,
+
+78
+00:21:09.450 --> 00:21:22.230
+Russell Kabir: we we have developed the null hypothesis here, and we say there is no difference between pre and post statement here. Maybe there is not, and much information, but in the question you will see
+
+79
+00:21:22.240 --> 00:21:28.220
+Russell Kabir: too much information is given there. From there you can develop the Nile and alternative hypothesis.
+
+80
+00:21:28.400 --> 00:21:52.319
+Russell Kabir: Then we said, then what is the null hypothesis that there is no difference between pre and post treatment and alternative hypothesis. We said, there is difference between pre and post treatment, and we said that the completed p-value is less than point 0 5. We reject the null hypothesis and the test statistics is significant. And so we conclude that there is difference between pre and post treatment.
+
+81
+00:21:52.320 --> 00:22:06.059
+Russell Kabir: and also the 95% Ci at the lower limit doesn't 5.5 9 or upper limit, 6.7 5. They don't contain one. So we can say that 95% ci is also significant.
+
+82
+00:22:06.060 --> 00:22:29.310
+Russell Kabir: So that's it from my end, guys it. I was running this session yesterday morning, but unfortunately I could not. I forgot to, you know. Start the recording. That's why I'm redoing this recording for all of you. Please feel free to get back to me. If you have any doubts. And also, you know, enjoy the time of
+
+83
+00:22:29.330 --> 00:22:45.800
+Russell Kabir: happy Neva from my end. I, who will hopefully see all of you again in in our jam on January Sem. First seminar session, which will be, I think, in the beginning of January. So all the best guys any question, please let me know. Thank you. Take care, bye.
+

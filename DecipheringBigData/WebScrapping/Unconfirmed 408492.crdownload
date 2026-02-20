@@ -1,0 +1,319 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[51]:
+
+
+a = [i for i in range(0, 30)] 
+
+
+# In[52]:
+
+
+print(a)
+
+
+# In[53]:
+
+
+get_ipython().system('pip install scipy python-Levenshtein')
+
+
+# In[54]:
+
+
+get_ipython().system('pip install scipy python-Levenshtein')
+
+
+# In[55]:
+
+
+import requests
+
+
+# In[56]:
+
+
+# First assign the URL of Wikipedia home page to a strings
+
+wiki_home = "https://en.wikipedia.org/wiki/Main_Page"
+
+
+# In[57]:
+
+
+#Use the get method from the requests library to get a response from this page:
+response = requests.get(wiki_home)
+
+
+# In[58]:
+
+
+#To get information about the response object, enter the following code:
+type(response)
+
+
+# In[59]:
+
+
+#Checking the Status of the Web Request
+
+
+# In[60]:
+
+
+def status_check(r):
+    if r.status_code==200:
+        print("Success!")
+        return 1
+    else:
+        print("Failed!")
+        return -1
+
+
+# In[61]:
+
+
+#Check the response using the status_check command:
+status_check(response)
+
+
+# In[62]:
+
+
+#When we run this function on the Wikipedia home page, we get back the particular encoding type that's used for that page. This function, like the previous one, takes the requests response object as an argument and returns a value:
+
+def encoding_check(r):
+    return (r.encoding)
+
+
+# In[63]:
+
+
+#Check the response:
+
+encoding_check(response)
+
+
+# In[64]:
+
+
+#write a utility function to decode the contents of the response:
+def decode_content(r,encoding):
+    return (r.content.decode(encoding))
+
+contents = decode_content(response,encoding_check(response))
+
+
+# In[65]:
+
+
+#Check the type of the decoded object:
+type(contents)
+
+
+# In[66]:
+
+
+#We finally got a string object by reading the HTML page!
+
+#Note
+#Note that the answer in this chapter and in the exercise in Jupyter notebook may vary because of updates that have been made to the Wikipedia page.
+
+
+# In[67]:
+
+
+#Check the length of the object and try printing some of it:
+len(contents)
+
+
+# In[68]:
+
+
+print(contents)
+
+
+# In[69]:
+
+
+#Extracting Human-Readable Text From a BeautifulSoup Object
+
+
+# In[70]:
+
+
+#It turns out that a BeautifulSoup object has a text method, which can be used just to extract text:
+
+#Import the package and then pass on the whole string (HTML content) to a method for parsing:
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(contents, 'html.parser')
+
+
+# In[71]:
+
+
+#Execute the following code in your notebook:
+txt_dump=soup.text
+
+#Find the type of the txt_dmp:
+type(txt_dump)
+
+
+# In[72]:
+
+
+#Find the length of the txt_dmp:
+len(txt_dump)
+
+#Now, the length of the text dump is much smaller than the raw HTML's string length. This is because bs4 has parsed through the HTML and extracted only human-readable text for further processing.
+
+
+# In[73]:
+
+
+print(txt_dump[:10])
+
+
+# In[74]:
+
+
+'''Extracting Text from a Section
+Now, let's move on to a more exciting data wrangling task. If you open the Wikipedia home page, you are likely to see a section called From today's featured article. This is an excerpt from the day's prominent article, which is randomly selected and promoted on the home page. In fact, this article can also change throughout the day:
+You need to extract the text from this section. There are number of ways to accomplish this task. We will go through a simple and intuitive method for doing so here.
+
+First, we try to identify two indices – the start index and end index of the string, which demarcate the start and end of the text we are interested in. In the next screenshot, the indices are shown:'''
+
+
+# In[75]:
+
+
+#The following code accomplishes the extraction:
+
+idx1=txt_dump.find("From today's featured article")
+
+idx2=txt_dump.find("Recently featured")
+
+print(txt_dump[idx1+len("From today's featured article"):idx2])
+
+
+# In[76]:
+
+
+#Extracting Important Historical Events that Happened on Today's Date
+#Next, we will try to extract the text corresponding to the important historical events that happened on today's date. This can generally be found at the bottom-right corner as shown in the following screenshot:
+
+
+# In[77]:
+
+
+#So, can we apply the same technique as we did for "From today's featured article"? Apparently not, because there is text just below where we want our extraction to end, which is not fixed, unlike in the previous case. Note that, in the previous exercise, the fixed string "Recently featured" occurs at the exact place where we want the extraction to stop. So, we could use it in our code. However, we cannot do that in this case, and the reason for this is illustrated in the following screenshot:
+
+
+# In[78]:
+
+
+#So, in this section, we just want to find out what the text looks like around the main content we are interested in. For that, we must find out the start of the string "On this day" and print out the next 1,000 characters, using the following command:
+
+
+# In[79]:
+
+
+idx3=txt_dump.find("On this day")
+
+print(txt_dump[idx3+len("On this day"):idx3+len("On this day")+1000])
+
+
+# In[80]:
+
+
+#Exercise 85: Using Advanced BS4 Techniques to Extract Relevant Text
+#HTML pages are made of many markup tags, such as <div>, which denotes a division of text/images, or <ul>, which denotes lists. We can take advantage of this structure and look at the element that contains the text we are interested in. In the Mozilla Firefox browser, we can easily do this by right-clicking and selecting the "Inspect Element" option:
+
+
+# In[81]:
+
+
+#Use the find_all method from BeautifulSoup, which scans all the tags of the HTML page (and their sub-elements) to find and extract the text associated with this particular <div> element.
+#Note
+#Note how we are utilizing the 'mp-otd' ID of the <div> to identify it among tens of other <div> elements.
+
+#The find_all method returns a NavigableString class, which has a useful text method associated with it for extraction.
+
+#To put these ideas together, we will create an empty list and append the text from the NavigableString class to this list as we traverse the pag
+
+
+# In[85]:
+
+
+text_list=[] #Empty list
+
+for d in soup.find_all('div'):
+    if (d.get('id')=='mp-otd'):
+        for i in d.find_all('ul'):
+            text_list.append(i.text)
+
+
+# In[84]:
+
+
+#Now, if we examine the text_list list, we will see that it has three elements. If we print the elements, separated by a marker, we will see that the text we are interested in appears as the first element!
+for i in text_list:
+    print(i)
+    print('-'*100)
+
+
+# In[87]:
+
+
+#Exercise 86: Creating a Compact Function to Extract the "On this Day" Text from the Wikipedia Home Page
+#As we discussed before, it is always good to try to functionalize specific tasks, particularly in a web scraping application:
+
+#Create a function, whose only job is to take the URL (as a string) and to return the text corresponding to the On this day section. The benefit of such a functional approach is that you can call this function from any Python script and use it anywhere in another program as a standalone module:
+#def wiki_on_this_day(url="https://en.wikipedia.org/wiki/Main_Page"):
+
+
+# In[107]:
+
+
+def wiki_on_this_day(url="https://en.wikipedia.org/wiki/Main_Page"):
+    import requests
+    from bs4 import BeautifulSoup
+    wiki_home = str(url)
+    response = requests.get(wiki_home)
+    def status_check(r):
+        if r.status_code==200:
+            return 1
+        else:
+            return -1
+    status = status_check(response)
+    if status==1:
+        contents = decode_content(response,encoding_check(response))
+    else:
+        print("Sorry could not reach the web page!")
+        return -1
+
+    soup = BeautifulSoup(contents, 'html.parser')
+    text_list=[]
+    for d in soup.find_all('div'):
+        if (d.get('id')=='mp-otd'):
+            for i in d.find_all('ul'):
+                text_list.append(i.text)
+            return (text_list[0])
+
+
+# In[108]:
+
+
+#Note how this function utilizes the status check and prints out an error message if the request failed. When we test this function with an intentionally incorrect URL, it behaves as expected:
+print(wiki_on_this_day("https://en.wikipedia.org/wiki/Main_Page1"))
+
+#Sorry could not reach the web page!
+
+
+# In[ ]:
+
+
+
+

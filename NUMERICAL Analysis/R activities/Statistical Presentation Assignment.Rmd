@@ -1,0 +1,407 @@
+---
+title: "Statistical Presentation"
+author: "AlexMutebe"
+date: "2024-02-12"
+output: pdf_document
+---
+```{r}
+library(dplyr)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+```{r}
+# Use haven library to import spss data format into R studio
+library(haven)
+HSE_2011 <- read_sav("D:/SCHULE/NUMERICAL Analysis/Assignment/HSE 2011.sav")
+
+```
+
+#Check if has no missing entries on individual serial number variable
+```{r}
+
+any(is.na(HSE_2011$pserial))
+```
+# Descriptive Statistics
+# a. How many people are included in the sample?
+```{r}
+dim(HSE_2011)
+
+```
+# b. What is the percentage of people who drink alcohol?
+```{r}
+alcohol_percent <- HSE_2011 %>%
+  group_by(dnnow) %>%
+  summarise(Percentage = n() / nrow(HSE_2011) * 100)
+
+alcohol_percent
+
+```
+
+# c. What is the percentage of women in the sample?
+```{r}
+#table(HSE_2011$Sex)
+women <- HSE_2011 %>%
+  group_by(Sex) %>%
+  summarise(Percentage = n() / nrow(HSE_2011) * 100)
+women
+
+```
+# d. What is the highest educational level?
+```{r}
+
+table(HSE_2011$topqual3)
+
+```
+# e. What is percentage of divorced and separated people?
+
+```{r}
+devorced_separated <- HSE_2011 %>%
+  group_by(marstatc) %>%
+  summarise(Percentage = n() / nrow(HSE_2011) * 100)
+
+devorced_separated
+```
+# f. Find the mean, median, mode, minimum, maximum, range and standard deviation of household size, BMI and age at last birthday.
+
+```{r}
+library(psych)
+library(tidyverse)
+descriptives <- HSE_2011 %>% select(HHSize,bmival,Age) %>%   psych::describe(quant=c(.25,.75)) %>%
+    as_tibble(rownames="rowname")  %>%
+    print()
+```
+# Removing negative entries for BMI
+```{r}
+bmi <- HSE_2011 %>% filter(bmival > 0)
+```
+
+```{r}
+
+summary(bmi$bmival)
+```
+# BMI Range
+```{r}
+range(bmi$bmival)
+```
+# BMI Standard deviation
+```{r}
+sd(bmi$bmival)
+```
+
+```{r}
+# Import the library
+library(modeest)
+ 
+# Compute the mode value
+mode_house_size =  mfv(HSE_2011$HHSize,HSE_2011$Age,HSE_2011$bmival)
+mode_age =  mfv(HSE_2011$Age)
+mode_bmi =  mfv(HSE_2011$bmival)
+print(mode_house_size)
+print(mode_age)
+print(mode_bmi)
+```
+```{r}
+calculate_mode <- function(data) {
+  uniq_vals <- unique(data)
+  uniq_counts <- table(data)
+  mode_value <- uniq_vals[which.max(uniq_counts)]
+  return(mode_value)
+}
+
+```
+
+```{r}
+# Calculate the mode using the user-defined function
+mode_house_size <- calculate_mode(HSE_2011$HHSize)
+mode_age <- calculate_mode(HSE_2011$Age)
+
+
+```
+# Removing the negative bmi entries
+```{r}
+mode_bmi <- HSE_2011 %>% filter(bmival > 0)
+```
+```{r}
+mode_bmi <- calculate_mode(mode_bmi$Age)
+```
+
+```{r}
+# Print the mode
+print(mode_house_size)
+print(mode_age)
+print(mode_bmi)
+```
+```{r}
+print(mode_bmi)
+```
+
+# 3. Inferential Statistics.
+#         a. Run a significance test to find out which gender drinks more alcohol.
+
+# The null hypothesis (H0) is that there is no difference in the level of alcohol consumption between males and females
+# The Alternative hypothesis (HA) is that there is difference in the level of alcohol consumption between males and females
+
+```{r}
+#Check for distribution of alcohol intake for males
+  total_alcohol <- HSE_2011 %>%  select(Sex,totalwu)
+  males_alcohol <- total_alcohol %>% filter(Sex==1)
+  females_alcohol <- total_alcohol %>% filter(Sex==2)
+
+```
+```{r}
+mean_males <- summary(males_alcohol$totalwu)
+mean_females <- summary(females_alcohol$totalwu)
+```
+```{r}
+print(mean_males)
+print(mean_females)
+```
+
+
+# check for normal distribution of the data for male group using Shapiro-Wilk normality test
+```{r}
+shapiro.test(males_alcohol$totalwu)
+
+# Since the categorical variable has two levels and p-value is 2.2e-16, which is less than 0.05, the total units of alcohol/week data for males does not follow a normal distribution therefore we shall use wilcoxin rank sum/man whitney u test
+
+```
+
+# check for normal distribution of the data for female group using Shapiro-Wilk normality test
+```{r}
+shapiro.test(females_alcohol$totalwu)
+
+# Since the categorical variable has two levels and p-value is 2.2e-16, which is less than 0.05, the total units of alcohol/week data for females does not follow a normal distribution therefore we shall use wilcoxin rank sum/man whitney u test
+
+```
+# Running the wilcoxin rank sum significance test on the null hypothesis
+```{r}
+wilcox_test_result <- wilcox.test(totalwu ~ Sex, data = total_alcohol)
+```
+```{r}
+wilcox_test_result
+```
+#p-value is  2.2e-16 which less than 0.05,  we reject the null pythothesis and say that there is a difference in total units of alcohol/week between males and females. Males consume more alcohol at an average rate of 15 total units/week compared to the females who have an average consumption rate of 7.5 total units/week
+
+# a Run a significance test to find out which region drinks the most alcohol.
+
+# The null hypothesis (H0) is that there is no difference in the level of alcohol consumption among regions
+# The Alternative hypothesis (HA) is that there is difference in the level of alcohol consumption among regions
+```{r}
+region_data <- HSE_2011 %>% select(Origin,totalwu) %>% filter(Origin > 0)
+print(region_data)
+```
+```{r}
+str(region_data) 
+```
+```{r}
+str(region_data)
+```
+
+
+```{r}
+# check for number of levels in region
+table(region_data$Origin)
+```
+
+```{r}
+library(labelled)
+
+```
+
+```{r}
+val_labels(region_data$Origin)
+```
+
+## check for normal distribution of the data for female group using Shapiro-Wilk normality test
+```{r}
+# QQplot of normally distributed values
+qqnorm(region_data$totalwu)
+
+# Add qqline to plot
+qqline(region_data$totalwu, col = "darkgreen")
+
+```
+```{r}
+level_1 <- region_data %>% filter(Origin==1)
+shapiro.test(level_1$totalwu[0:5000])
+```
+# Since the categorical variable more than two levels and p-value is 2.2e-16, which is less than 0.05, the total units of alcohol/week data by region does not follow a normal distribution therefore we shall use kruskal wallis test
+
+```{r}
+# Perform Kruskal-Wallis test
+wallis_test <- kruskal.test(totalwu ~ Origin, data = region_data)
+
+```
+#The p-value is 2.2e-16 which is less than 0.05, we reject the null hypothesis and say that the variable alcohol consumption varies significantly across Origins
+```{r}
+data <- region_data
+data$Origin <- as.factor(data$Origin)
+```
+
+# Scatter plot to show which region has most alcohol consumption
+```{r}
+bar_plot <- ggplot(data, aes(x = totalwu, y = Origin, color = Origin)) +
+  geom_jitter(na.rm = TRUE) +  # Add jittered points to avoid overlap
+  labs(title = "Scatter Plot of Alcohol consumption by region",
+       x = "Alcohol consumption by region",
+       y = "") +  
+  theme_minimal()  # Apply minimal them
+
+```
+```{r}
+bar_plot
+```
+# The graph show region 1 (White - English/Welsh/Scottish/Northern Irish/British) with highest consentration of alcohol consumption
+
+
+
+#C. Investigate whether there is a statistical difference between men and women on the following variables:
+# Valid height.
+
+
+# Null Hypothesis (H0): There is no difference in height between men and women.
+# Alternative Hypothesis (H1): There is a difference in height between men and women.
+```{r}
+var_label(HSE_2011)
+```
+
+```{r echo=TRUE}
+#create subset with sex, height and weight
+
+height_weight <- HSE_2011 %>% select(Sex,htval,wtval)
+```
+```{r}
+#Create separate datasets for each sex category
+males_data <- height_weight %>% filter(Sex==1)
+females_data <- height_weight %>% filter(Sex==2)
+```
+#check for normal distribution in the valid height data
+
+```{r}
+# Using histogram ot check distribution in the height for Males
+hist(males_data$htval, 
+     col="green",
+     border="black",
+     prob = TRUE,
+     xlab = "Valid Height",
+     main = "Distribution in the Valid Height for Males")
+
+lines(density(males_data$htval,na.rm = TRUE),
+      lwd = 2,
+      col = "chocolate3")
+
+# Using histogram ot check distribution in the height for Females
+hist(females_data$htval, 
+     col="green",
+     border="black",
+     prob = TRUE,
+     xlab = "Valid Height",
+     main = "Distribution in the Valid Height for Females")
+
+lines(density(females_data$htval,na.rm = TRUE),
+      lwd = 2,
+      col = "chocolate3")
+```
+
+## check for normal distribution of the data for male group using QQplot
+```{r}
+# QQplot of normally distributed values in the male group
+qqnorm(males_data$htval)
+
+# Add qqline to plot
+qqline(males_data$htval, col = "darkgreen")
+
+```
+
+# There are a significant number of data point off the line in the qqplot therefore the data does not follow a normal distribution
+
+```{r}
+# QQplot of normally distributed height values for the female group
+qqnorm(females_data$htval)
+
+# Add qqline to plot
+qqline(females_data$htval, col = "darkgreen")
+```
+
+# There are a significant number of data point off the line in the qqplot therefore the data does not follow a normal distribution
+
+# Since data is non parametric we are using the Man-whitney U test to check whether there is a statistical difference between men and women on the Valid height variable.
+
+```{r}
+wilcox_test_result <- wilcox.test(htval ~ Sex, data = height_weight)
+wilcox_test_result
+
+```
+# The p-value is 2.2e-16 which is less than 0.05, we reject the null hypothesis and say that the difference in height statistically significant between males and females
+
+
+
+
+# Valid weight.
+# Null Hypothesis (H0): There is no difference in weight. between men and women.
+# Alternative Hypothesis (H1): There is a difference in weight. between men and women.
+
+#check for normal distribution in the valid Weight data
+
+```{r}
+# Using histogram ot check distribution in the Weight for Males
+hist(males_data$wtval, 
+     col="green",
+     border="black",
+     prob = TRUE,
+     xlab = "Valid Weight",
+     main = "Distribution in the Valid Weight for Males")
+
+lines(density(males_data$wtval,na.rm = TRUE),
+      lwd = 2,
+      col = "chocolate3")
+
+# Using histogram ot check distribution in the Weight for Females
+hist(females_data$wtval, 
+     col="green",
+     border="black",
+     prob = TRUE,
+     xlab = "Valid Weight",
+     main = "Distribution in the Valid Weight for Females")
+
+lines(density(females_data$wtval,na.rm = TRUE),
+      lwd = 2,
+      col = "chocolate3")
+```
+
+## check for normal distribution of the data for male group using QQplot
+```{r}
+# QQplot of normally distributed values in the male group
+qqnorm(males_data$wtval)
+
+# Add qqline to plot
+qqline(males_data$wtval, col = "darkgreen")
+
+```
+
+# There are a significant number of data point off the line in the qqplot therefore the data does not follow a normal distribution
+
+```{r}
+# QQplot of normally distributed Weight values for the female group
+qqnorm(females_data$wtval)
+
+# Add qqline to plot
+qqline(females_data$wtval, col = "darkgreen")
+```
+
+# There are a significant number of data point off the line in the qqplot therefore the data does not follow a normal distribution
+
+# Since data is non parametric we are using the Man-whitney U test to test whether there is a statistical difference between men and women on the Valid Weight variable.
+
+```{r}
+wilcox_test_result <- wilcox.test(wtval ~ Sex, data = height_weight)
+wilcox_test_result
+
+```
+# The p-value is 2.2e-16 which is less than 0.05, we reject the null hypothesis and say that the difference in Weight statistically significant between males and females
+
+
+

@@ -1,0 +1,1766 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Programming Exercise},
+  pdfauthor={Alex Mutebe MSc. Data Science},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Programming Exercise}
+\author{Alex Mutebe MSc. Data Science}
+\date{15 June 2023}
+
+\begin{document}
+\maketitle
+
+\hypertarget{section}{%
+\subsubsection{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}\label{section}}
+
+\hypertarget{part-1}{%
+\subsection{Part 1:}\label{part-1}}
+
+\hypertarget{exploratory-analysis}{%
+\paragraph{Exploratory analysis}\label{exploratory-analysis}}
+
+\hypertarget{importing-marketing-data-from-a-csv-file-into-r-studio}{%
+\subsubsection{importing marketing data from a csv file into R
+studio}\label{importing-marketing-data-from-a-csv-file-into-r-studio}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_date }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"MMA marketing\_data\_sample.csv"}\NormalTok{,}\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{getting-started-with-data-pre-porcessing}{%
+\subsubsection{Getting started with Data
+Pre-porcessing}\label{getting-started-with-data-pre-porcessing}}
+
+\begin{itemize}
+\tightlist
+\item
+  Add necessary libraries, particularly tidyverse, for processing and
+  visualizing data
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Import the tidyverse package for data visualisation and wrangling}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(corrplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## corrplot 0.92 loaded
+\end{verbatim}
+
+\hypertarget{exploratory-data-analysis}{%
+\subsection{Exploratory Data Analysis}\label{exploratory-data-analysis}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Checking in with the first 10 records}
+\NormalTok{knitr}\SpecialCharTok{::} \FunctionTok{kable}\NormalTok{(}
+\NormalTok{m\_date[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,], }\AttributeTok{caption =} \StringTok{"10 row preview of the marketing data subset"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.02}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.06}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.10}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.05}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.03}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.06}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.04}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.04}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.03}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.06}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.06}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.07}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.07}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.05}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.06}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.01}}@{}}
+\caption{10 row preview of the marketing data subset}\tabularnewline
+\toprule
+age & job & marital & k & default & housing & loan & contact & month &
+day\_of\_week & duration & campaign & pdays & previous & poutcome &
+emp.var.rate & cons.price.idx & cons.conf.idx & euribor3m & nr.employed
+& y \\
+\midrule
+\endfirsthead
+\toprule
+age & job & marital & k & default & housing & loan & contact & month &
+day\_of\_week & duration & campaign & pdays & previous & poutcome &
+emp.var.rate & cons.price.idx & cons.conf.idx & euribor3m & nr.employed
+& y \\
+\midrule
+\endhead
+30 & blue-collar & married & basic.9y & no & yes & no & cellular & may &
+fri & 487 & 2 & 999 & 0 & nonexistent & -1.8 & 92.893 & -46.2 & 1.313 &
+5099.1 & no \\
+39 & services & single & high.school & no & no & no & telephone & may &
+fri & 346 & 4 & 999 & 0 & nonexistent & 1.1 & 93.994 & -36.4 & 4.855 &
+5191.0 & no \\
+25 & services & married & high.school & no & yes & no & telephone & jun
+& wed & 227 & 1 & 999 & 0 & nonexistent & 1.4 & 94.465 & -41.8 & 4.962 &
+5228.1 & no \\
+38 & services & married & basic.9y & no & unknown & unknown & telephone
+& jun & fri & 17 & 3 & 999 & 0 & nonexistent & 1.4 & 94.465 & -41.8 &
+4.959 & 5228.1 & no \\
+47 & admin. & married & university.degree & no & yes & no & cellular &
+nov & mon & 58 & 1 & 999 & 0 & nonexistent & -0.1 & 93.200 & -42.0 &
+4.191 & 5195.8 & no \\
+32 & services & single & university.degree & no & no & no & cellular &
+sep & thu & 128 & 3 & 999 & 2 & failure & -1.1 & 94.199 & -37.5 & 0.884
+& 4963.6 & no \\
+32 & admin. & single & university.degree & no & yes & no & cellular &
+sep & mon & 290 & 4 & 999 & 0 & nonexistent & -1.1 & 94.199 & -37.5 &
+0.879 & 4963.6 & no \\
+41 & entrepreneur & married & university.degree & unknown & yes & no &
+cellular & nov & mon & 44 & 2 & 999 & 0 & nonexistent & -0.1 & 93.200 &
+-42.0 & 4.191 & 5195.8 & no \\
+31 & services & divorced & professional.course & no & no & no & cellular
+& nov & tue & 68 & 1 & 999 & 1 & failure & -0.1 & 93.200 & -42.0 & 4.153
+& 5195.8 & no \\
+35 & blue-collar & married & basic.9y & unknown & no & no & telephone &
+may & thu & 170 & 1 & 999 & 0 & nonexistent & 1.1 & 93.994 & -36.4 &
+4.855 & 5191.0 & no \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{base-r-sampling-of-10-entries-from-the-dataset}{%
+\subsubsection{Base R sampling of 10 entries from the
+dataset}\label{base-r-sampling-of-10-entries-from-the-dataset}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::} \FunctionTok{kable}\NormalTok{(}
+\NormalTok{sampled }\OtherTok{\textless{}{-}}\NormalTok{ m\_date[}\FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(m\_date), }\DecValTok{10}\NormalTok{), ], }\AttributeTok{caption =} \StringTok{"Sampling 10 records"}\NormalTok{ ) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.02}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.02}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.07}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.09}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.05}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.03}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.06}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.04}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.04}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.03}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.04}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.06}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.06}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.07}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.07}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.05}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.06}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 42\tabcolsep) * \real{0.01}}@{}}
+\caption{Sampling 10 records}\tabularnewline
+\toprule
+& age & job & marital & k & default & housing & loan & contact & month &
+day\_of\_week & duration & campaign & pdays & previous & poutcome &
+emp.var.rate & cons.price.idx & cons.conf.idx & euribor3m & nr.employed
+& y \\
+\midrule
+\endfirsthead
+\toprule
+& age & job & marital & k & default & housing & loan & contact & month &
+day\_of\_week & duration & campaign & pdays & previous & poutcome &
+emp.var.rate & cons.price.idx & cons.conf.idx & euribor3m & nr.employed
+& y \\
+\midrule
+\endhead
+2061 & 31 & technician & married & professional.course & no & yes & no &
+cellular & aug & wed & 409 & 2 & 999 & 0 & nonexistent & 1.4 & 93.444 &
+-36.1 & 4.965 & 5228.1 & no \\
+1048 & 26 & self-employed & single & university.degree & no & yes & no &
+cellular & jun & wed & 181 & 2 & 999 & 0 & nonexistent & -2.9 & 92.963 &
+-40.8 & 1.244 & 5076.2 & no \\
+3268 & 39 & management & married & unknown & no & no & no & cellular &
+nov & thu & 352 & 1 & 999 & 0 & nonexistent & -0.1 & 93.200 & -42.0 &
+4.076 & 5195.8 & no \\
+3201 & 36 & blue-collar & married & basic.9y & no & unknown & unknown &
+telephone & jun & tue & 30 & 3 & 999 & 0 & nonexistent & 1.4 & 94.465 &
+-41.8 & 4.961 & 5228.1 & no \\
+3519 & 58 & blue-collar & married & basic.4y & no & yes & no & telephone
+& may & thu & 184 & 1 & 999 & 0 & nonexistent & 1.1 & 93.994 & -36.4 &
+4.860 & 5191.0 & no \\
+3827 & 28 & student & single & professional.course & no & no & no &
+telephone & jun & fri & 168 & 2 & 999 & 0 & nonexistent & 1.4 & 94.465 &
+-41.8 & 4.959 & 5228.1 & no \\
+4083 & 44 & admin. & married & university.degree & no & yes & no &
+telephone & may & thu & 413 & 2 & 999 & 0 & nonexistent & 1.1 & 93.994 &
+-36.4 & 4.860 & 5191.0 & no \\
+2235 & 37 & admin. & single & university.degree & no & no & yes &
+cellular & may & mon & 553 & 1 & 999 & 1 & failure & -1.8 & 92.893 &
+-46.2 & 1.299 & 5099.1 & no \\
+3707 & 43 & blue-collar & married & basic.9y & no & no & no & telephone
+& jun & thu & 246 & 2 & 999 & 0 & nonexistent & 1.4 & 94.465 & -41.8 &
+4.866 & 5228.1 & no \\
+418 & 30 & technician & single & university.degree & no & no & no &
+cellular & aug & thu & 183 & 7 & 999 & 0 & nonexistent & 1.4 & 93.444 &
+-36.1 & 4.963 & 5228.1 & no \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{data-formats-for-variables-are-examined}{%
+\subsubsection{Data formats for variables are
+examined}\label{data-formats-for-variables-are-examined}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(m\_date)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    4100 obs. of  21 variables:
+##  $ age           : int  30 39 25 38 47 32 32 41 31 35 ...
+##  $ job           : chr  "blue-collar" "services" "services" "services" ...
+##  $ marital       : chr  "married" "single" "married" "married" ...
+##  $ k             : chr  "basic.9y" "high.school" "high.school" "basic.9y" ...
+##  $ default       : chr  "no" "no" "no" "no" ...
+##  $ housing       : chr  "yes" "no" "yes" "unknown" ...
+##  $ loan          : chr  "no" "no" "no" "unknown" ...
+##  $ contact       : chr  "cellular" "telephone" "telephone" "telephone" ...
+##  $ month         : chr  "may" "may" "jun" "jun" ...
+##  $ day_of_week   : chr  "fri" "fri" "wed" "fri" ...
+##  $ duration      : int  487 346 227 17 58 128 290 44 68 170 ...
+##  $ campaign      : int  2 4 1 3 1 3 4 2 1 1 ...
+##  $ pdays         : int  999 999 999 999 999 999 999 999 999 999 ...
+##  $ previous      : int  0 0 0 0 0 2 0 0 1 0 ...
+##  $ poutcome      : chr  "nonexistent" "nonexistent" "nonexistent" "nonexistent" ...
+##  $ emp.var.rate  : num  -1.8 1.1 1.4 1.4 -0.1 -1.1 -1.1 -0.1 -0.1 1.1 ...
+##  $ cons.price.idx: num  92.9 94 94.5 94.5 93.2 ...
+##  $ cons.conf.idx : num  -46.2 -36.4 -41.8 -41.8 -42 -37.5 -37.5 -42 -42 -36.4 ...
+##  $ euribor3m     : num  1.31 4.86 4.96 4.96 4.19 ...
+##  $ nr.employed   : num  5099 5191 5228 5228 5196 ...
+##  $ y             : chr  "no" "no" "no" "no" ...
+\end{verbatim}
+
+\hypertarget{database-structure}{%
+\subsubsection{Database structure}\label{database-structure}}
+
+\begin{itemize}
+\tightlist
+\item
+  4100 records
+\item
+  21 Variables
+
+  \begin{itemize}
+  \tightlist
+  \item
+    5 intergers
+  \item
+    11 categorical
+  \item
+    2 numeric variables
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{missing-data}{%
+\subsubsection{Missing data}\label{missing-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(m\_date))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\hypertarget{observation}{%
+\paragraph{Observation}\label{observation}}
+
+\begin{itemize}
+\tightlist
+\item
+  Since the sum() function returns 0, there are no missing entries in
+  the dataset.
+\end{itemize}
+
+\hypertarget{converting-categorical-variables-to-factors}{%
+\subsubsection{Converting categorical variables to
+factors}\label{converting-categorical-variables-to-factors}}
+
+\begin{itemize}
+\tightlist
+\item
+  Working with factors during analysis and ML modeling is simpler.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{job }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{job)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{marital }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{marital)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{k }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{k)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{default }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{default)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{housing }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{housing)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{loan }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{loan)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{contact }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{contact)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{month }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{month)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{day\_of\_week }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{day\_of\_week)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{poutcome }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{poutcome)}
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{y)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-sample-of-the-dataset-upon-conversion}{%
+\paragraph{a sample of the dataset upon
+conversion}\label{a-sample-of-the-dataset-upon-conversion}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(m\_date)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    4100 obs. of  21 variables:
+##  $ age           : int  30 39 25 38 47 32 32 41 31 35 ...
+##  $ job           : Factor w/ 12 levels "admin.","blue-collar",..: 2 8 8 8 1 8 1 3 8 2 ...
+##  $ marital       : Factor w/ 4 levels "divorced","married",..: 2 3 2 2 2 3 3 2 1 2 ...
+##  $ k             : Factor w/ 8 levels "basic.4y","basic.6y",..: 3 4 4 3 7 7 7 7 6 3 ...
+##  $ default       : Factor w/ 3 levels "no","unknown",..: 1 1 1 1 1 1 1 2 1 2 ...
+##  $ housing       : Factor w/ 3 levels "no","unknown",..: 3 1 3 2 3 1 3 3 1 1 ...
+##  $ loan          : Factor w/ 3 levels "no","unknown",..: 1 1 1 2 1 1 1 1 1 1 ...
+##  $ contact       : Factor w/ 2 levels "cellular","telephone": 1 2 2 2 1 1 1 1 1 2 ...
+##  $ month         : Factor w/ 10 levels "apr","aug","dec",..: 7 7 5 5 8 10 10 8 8 7 ...
+##  $ day_of_week   : Factor w/ 5 levels "fri","mon","thu",..: 1 1 5 1 2 3 2 2 4 3 ...
+##  $ duration      : int  487 346 227 17 58 128 290 44 68 170 ...
+##  $ campaign      : int  2 4 1 3 1 3 4 2 1 1 ...
+##  $ pdays         : int  999 999 999 999 999 999 999 999 999 999 ...
+##  $ previous      : int  0 0 0 0 0 2 0 0 1 0 ...
+##  $ poutcome      : Factor w/ 3 levels "failure","nonexistent",..: 2 2 2 2 2 1 2 2 1 2 ...
+##  $ emp.var.rate  : num  -1.8 1.1 1.4 1.4 -0.1 -1.1 -1.1 -0.1 -0.1 1.1 ...
+##  $ cons.price.idx: num  92.9 94 94.5 94.5 93.2 ...
+##  $ cons.conf.idx : num  -46.2 -36.4 -41.8 -41.8 -42 -37.5 -37.5 -42 -42 -36.4 ...
+##  $ euribor3m     : num  1.31 4.86 4.96 4.96 4.19 ...
+##  $ nr.employed   : num  5099 5191 5228 5228 5196 ...
+##  $ y             : Factor w/ 2 levels "no","yes": 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\hypertarget{checking-the-distribution-and-presence-of-outliers}{%
+\subsubsection{Checking the distribution and presence of
+outliers}\label{checking-the-distribution-and-presence-of-outliers}}
+
+\begin{itemize}
+\tightlist
+\item
+  Descriptive statistics and data visualization\\
+\item
+  EDA, or exploratory data analysis
+\end{itemize}
+
+\hypertarget{age}{%
+\paragraph{Age}\label{age}}
+
+\begin{itemize}
+\tightlist
+\item
+  Using a box plot to see outliers
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{age)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date,}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(age)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   18.00   32.00   38.00   40.12   47.00   88.00
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  A box plot, according to Mike (2021), employs boxes and lines to show
+  how the distributions of one or more sets of numerical data. To
+  visualize the differences between the variable features of categorical
+  and continuous data types, bar charts and histograms can be combined
+  (Indratmo et al., 2014).
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    About 50\% of the age distribution falls between 32 and 47,
+    according to the boxplot.
+  \item
+    The average age is 40.
+  \item
+    After age 75, there have been several observed outliers.
+  \item
+    Overall, the hitogram displays a normal age distribution.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{duration}{%
+\subsubsection{Duration}\label{duration}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{duration)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date,}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(duration)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{duration)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0   103.0   181.0   256.8   317.0  3643.0
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The boxplot shows that about 50\% of the duration ranges between 103
+    to 317.
+  \item
+    The average duration is 256.8
+  \item
+    There is an observation of some outliers after 800\\
+  \item
+    A left skew in the data is visible in the histogram.
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Summary statistics for pdays}
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{pdays)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0   999.0   999.0   960.2   999.0   999.0
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Abnormality in the data distribution
+  \item
+    detailed attention is needed
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Both graphs show two values that are far apart i.e 0 and 1000
+    \end{itemize}
+  \end{itemize}
+\item
+  We notice that the pday variable is numeric
+
+  \begin{itemize}
+  \tightlist
+  \item
+    999 represents missing values
+  \item
+    999 values is misleading the analysis
+  \end{itemize}
+\item
+  The accuracy of machine learning models might be decreased by missing
+  data (Tejashree, 2022). A model that has been trained with all missing
+  values removed, in accordance with Satyam (2020), produces a robust
+  model.
+\item
+  The code below updates the entries containg missing values i.e 999 to
+  missing (Na)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_date }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(m\_date,}\AttributeTok{pdays5 =} \FunctionTok{ifelse}\NormalTok{(pdays }\SpecialCharTok{==} \DecValTok{999}\NormalTok{,}\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{,pdays))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Updating the pdays variable
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_date}\SpecialCharTok{$}\NormalTok{pdays }\OtherTok{\textless{}{-}}\NormalTok{ m\_date}\SpecialCharTok{$}\NormalTok{pdays5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Summary statistics
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{pdays)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Length     Class      Mode 
+##      4100 character character
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    After removing 999 value from pdays data
+
+    \begin{itemize}
+    \tightlist
+    \item
+      3940 out of 4100 records contained missing data, as we can see.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{previous}{%
+\subsubsection{Previous}\label{previous}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{previous)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{previous)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.0000  0.0000  0.0000  0.1907  0.0000  6.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date,}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(previous)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The boxplot and historgram show that mostly there were no contacts
+    performed before this campaign
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{cons.conf.idx-consumer-confidence-index}{%
+\subsubsection{cons.conf.idx consumer confidence
+index}\label{cons.conf.idx-consumer-confidence-index}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{cons.conf.idx)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date,}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(cons.conf.idx)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{cons.conf.idx)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   -50.8   -42.7   -41.8   -40.5   -36.4   -26.9
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    the con.conf.idx contains negative values.
+  \end{itemize}
+\item
+  One of the best methods for handling negative numbers in data analysis
+  transformations is the log transformation (Rick, 2011).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Step 1
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Shifting values to positive range
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_date }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(m\_date,}\AttributeTok{shifted\_cons.conf.idx =}\NormalTok{ m\_date}\SpecialCharTok{$}\NormalTok{cons.conf.idx }\SpecialCharTok{{-}} \FunctionTok{min}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{cons.conf.idx) }\SpecialCharTok{+} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Applying log transformation using log()
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_date }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(m\_date,}\AttributeTok{log\_cons.conf.idx =} \FunctionTok{log}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{shifted\_cons.conf.idx))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{log\_cons.conf.idx)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   2.208   2.303   2.326   2.734   3.215
+\end{verbatim}
+
+\begin{itemize}
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    All of our values are now positive following data transformation.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{euribor3m}{%
+\subsubsection{euribor3m}\label{euribor3m}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{euribor3m)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date,}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(euribor3m)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{euribor3m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.635   1.334   4.857   3.621   4.961   5.045
+\end{verbatim}
+
+\hypertarget{nr.employed}{%
+\subsubsection{nr.employed}\label{nr.employed}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{nr.employed)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date,}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(nr.employed)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-31-1.pdf}
+
+\hypertarget{descriptive-statistics}{%
+\subsection{Descriptive Statistics}\label{descriptive-statistics}}
+
+\begin{itemize}
+\tightlist
+\item
+  numeric variables
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_date }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize\_if}\NormalTok{(is.numeric, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        age duration campaign  previous emp.var.rate cons.price.idx
+## 1 40.11707 256.7546 2.538537 0.1907317   0.08517073       93.58012
+##   cons.conf.idx euribor3m nr.employed shifted_cons.conf.idx log_cons.conf.idx
+## 1     -40.49846  3.621421    5166.473              11.30154          2.325588
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Examining the relationship between age and duration
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(age }\SpecialCharTok{\textasciitilde{}}\NormalTok{ duration, }\AttributeTok{data =}\NormalTok{ m\_date, }\AttributeTok{col =} \StringTok{"dodgerblue"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{20}\NormalTok{, }\AttributeTok{cex =} \FloatTok{1.5}\NormalTok{,}
+\AttributeTok{main =} \StringTok{"age vs duration"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-33-1.pdf}
+
+\hypertarget{analysis-of-categorical-variables}{%
+\subsection{Analysis of categorical
+variables}\label{analysis-of-categorical-variables}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{ggplot}\NormalTok{(m\_date, }\AttributeTok{mapping=}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{job,}\AttributeTok{fill=}\NormalTok{job))) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-34-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{ggplot}\NormalTok{(m\_date, }\AttributeTok{mapping=}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{marital,}\AttributeTok{fill=}\NormalTok{marital))) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-35-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date, }\AttributeTok{mapping=}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{k,}\AttributeTok{fill=}\NormalTok{k))) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date, }\AttributeTok{mapping=}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{k,}\AttributeTok{fill=}\NormalTok{k))) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-37-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  K
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{k)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            basic.4y            basic.6y            basic.9y         high.school 
+##                 428                 226                 572                 914 
+##          illiterate professional.course   university.degree             unknown 
+##                   1                 533                1259                 167
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    most clients have a level of university education
+  \item
+    1 record of illiterate customers
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The record will be eliminated to ensure reliable and accurate
+      model estimation.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_date2 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(m\_date, k}\SpecialCharTok{!=}\StringTok{"illiterate"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{housing}{%
+\subsubsection{Housing}\label{housing}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date, }\AttributeTok{mapping=}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{housing,}\AttributeTok{fill=}\NormalTok{housing))) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-40-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{housing)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      no unknown     yes 
+##    1832     104    2164
+\end{verbatim}
+
+\hypertarget{loan}{%
+\subsubsection{loan}\label{loan}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date, }\AttributeTok{mapping=}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{loan,}\AttributeTok{fill=}\NormalTok{loan))) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-42-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{loan)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      no unknown     yes 
+##    3334     104     662
+\end{verbatim}
+
+\hypertarget{loan-contact}{%
+\subsubsection{loan contact}\label{loan-contact}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date, }\AttributeTok{mapping=}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{contact,}\AttributeTok{fill=}\NormalTok{contact))) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-44-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{contact)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  cellular telephone 
+##      2639      1461
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The graph demonstrates that there were more cellular customer
+    contacts.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{loan-month}{%
+\subsubsection{loan month}\label{loan-month}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date, }\AttributeTok{mapping=}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{month,}\AttributeTok{fill=}\NormalTok{month))) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-46-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The month of May saw the most contacts.
+  \item
+    Decembar saw the fewest contacts made overall.
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{month)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  apr  aug  dec  jul  jun  mar  may  nov  oct  sep 
+##  214  633   22  707  528   48 1373  443   68   64
+\end{verbatim}
+
+\hypertarget{loan-day_of_week}{%
+\subsubsection{loan day\_of\_week}\label{loan-day_of_week}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(m\_date, }\AttributeTok{mapping=}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{day\_of\_week,}\AttributeTok{fill=}\NormalTok{day\_of\_week))) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-48-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_date}\SpecialCharTok{$}\NormalTok{day\_of\_week)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## fri mon thu tue wed 
+## 762 851 856 839 792
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Normal distribution of numbers throughout the week on all days
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{part-2-statistical-modelling}{%
+\subsection{Part 2 Statistical
+modelling}\label{part-2-statistical-modelling}}
+
+\begin{itemize}
+\tightlist
+\item
+  The strength and direction of correlations between variables can be
+  examined using a correlation matrix (Giuseppe, 2022).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mm\_cor\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{select\_if}\NormalTok{(m\_date, is.numeric)}
+
+\CommentTok{\# Compute the correlation matrix}
+\NormalTok{cor\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(mm\_cor\_matrix)}
+
+\CommentTok{\# Plot the correlation matrix}
+\FunctionTok{corrplot}\NormalTok{(cor\_matrix, }\AttributeTok{method =} \StringTok{"color"}\NormalTok{, }\AttributeTok{type =} \StringTok{"lower"}\NormalTok{, }\AttributeTok{tl.cex =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-50-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Multicollinearity can be observed in redundant columns created
+    during data pre-procesing
+  \end{itemize}
+\item
+  shifted\_cons.conf.idx,cons.conf.idx \& pdays5 will be dropped
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#final\_mm\_dataset \textless{}{-} select(m\_date,{-}c(shifted\_cons.conf.idx,pdays5,cons.conf.idx,marital,poutcome))}
+\NormalTok{final\_mm\_dataset }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(m\_date,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(shifted\_cons.conf.idx,pdays5,cons.conf.idx))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{select\_if}\NormalTok{(final\_mm\_dataset, is.numeric)}
+
+\CommentTok{\# Compute the correlation matrix}
+\NormalTok{mm\_cor\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(df)}
+
+\CommentTok{\# Plot the correlation matrix}
+\FunctionTok{corrplot}\NormalTok{(mm\_cor\_matrix, }\AttributeTok{method =} \StringTok{"color"}\NormalTok{, }\AttributeTok{type =} \StringTok{"lower"}\NormalTok{, }\AttributeTok{tl.cex =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-52-1.pdf}
+
+\hypertarget{logistic-modeling}{%
+\subsubsection{logistic modeling}\label{logistic-modeling}}
+
+\begin{itemize}
+\tightlist
+\item
+  Note that we are using logisitic regression because our outcome is
+  binary i.e yes or no
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'caret'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     lift
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Spliting the dataset into a train set and a test set
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{350}\NormalTok{)}
+\CommentTok{\#partitioning the dataset i.e  70\% train set and 30\% for test set}
+\NormalTok{mm\_train }\OtherTok{=} \FunctionTok{createDataPartition}\NormalTok{(}\AttributeTok{y =}\NormalTok{ final\_mm\_dataset}\SpecialCharTok{$}\NormalTok{y, }\AttributeTok{times =} \DecValTok{1}\NormalTok{, }\AttributeTok{p =} \FloatTok{0.7}\NormalTok{, }\AttributeTok{list =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Defining the training and testing datasets
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{train\_set }\OtherTok{=} \FunctionTok{slice}\NormalTok{(final\_mm\_dataset, mm\_train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Slicing with a 1-column matrix was deprecated in dplyr 1.1.0.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test\_set }\OtherTok{=} \FunctionTok{slice}\NormalTok{(final\_mm\_dataset, }\SpecialCharTok{{-}}\NormalTok{mm\_train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Creating a logistic regression model
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ train\_set, }\AttributeTok{family =}\NormalTok{ binomial)}
+
+\CommentTok{\# Print the summary of the model}
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y ~ ., family = binomial, data = train_set)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -5.0927  -0.2810  -0.1650  -0.1039   2.9060  
+## 
+## Coefficients: (1 not defined because of singularities)
+##                        Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)           6.441e+01  1.500e+02   0.429  0.66765    
+## age                   6.630e-03  1.022e-02   0.649  0.51651    
+## jobblue-collar        9.245e-02  3.166e-01   0.292  0.77026    
+## jobentrepreneur      -1.259e+00  6.772e-01  -1.860  0.06295 .  
+## jobhousemaid          2.672e-01  5.445e-01   0.491  0.62356    
+## jobmanagement        -1.780e-02  3.469e-01  -0.051  0.95908    
+## jobretired            1.997e-01  4.303e-01   0.464  0.64251    
+## jobself-employed     -7.838e-01  5.403e-01  -1.451  0.14689    
+## jobservices          -1.728e-02  3.595e-01  -0.048  0.96167    
+## jobstudent           -7.994e-02  4.940e-01  -0.162  0.87144    
+## jobtechnician         2.058e-01  2.884e-01   0.714  0.47532    
+## jobunemployed         7.067e-01  4.552e-01   1.553  0.12051    
+## jobunknown           -2.183e+00  1.311e+00  -1.665  0.09591 .  
+## maritalmarried        1.837e-01  2.999e-01   0.612  0.54028    
+## maritalsingle         1.952e-01  3.442e-01   0.567  0.57056    
+## maritalunknown        5.258e-01  1.254e+00   0.419  0.67487    
+## kbasic.6y            -7.036e-02  4.867e-01  -0.145  0.88507    
+## kbasic.9y             1.106e-01  3.704e-01   0.299  0.76521    
+## khigh.school          1.823e-01  3.601e-01   0.506  0.61280    
+## killiterate          -1.456e+01  2.400e+03  -0.006  0.99516    
+## kprofessional.course  9.146e-02  4.053e-01   0.226  0.82146    
+## kuniversity.degree    1.219e-01  3.645e-01   0.334  0.73807    
+## kunknown              1.638e-01  4.946e-01   0.331  0.74057    
+## defaultunknown        1.052e-02  2.568e-01   0.041  0.96734    
+## defaultyes           -1.202e+01  2.400e+03  -0.005  0.99600    
+## housingunknown       -5.955e-01  6.227e-01  -0.956  0.33896    
+## housingyes           -1.554e-01  1.719e-01  -0.904  0.36594    
+## loanunknown                  NA         NA      NA       NA    
+## loanyes              -1.584e-01  2.312e-01  -0.685  0.49327    
+## contacttelephone     -6.727e-01  3.218e-01  -2.091  0.03656 *  
+## monthaug             -1.318e-01  5.442e-01  -0.242  0.80863    
+## monthdec              1.249e+00  8.301e-01   1.504  0.13256    
+## monthjul              6.227e-02  4.474e-01   0.139  0.88929    
+## monthjun              9.601e-01  5.640e-01   1.702  0.08870 .  
+## monthmar              1.709e+00  6.359e-01   2.688  0.00720 ** 
+## monthmay             -7.572e-01  3.706e-01  -2.043  0.04106 *  
+## monthnov             -1.000e+00  5.256e-01  -1.903  0.05708 .  
+## monthoct              1.819e-01  6.898e-01   0.264  0.79199    
+## monthsep             -1.149e-01  7.841e-01  -0.147  0.88348    
+## day_of_weekmon        3.918e-01  2.726e-01   1.438  0.15055    
+## day_of_weekthu        3.857e-01  2.789e-01   1.383  0.16664    
+## day_of_weektue        1.849e-01  2.841e-01   0.651  0.51509    
+## day_of_weekwed        7.973e-01  2.838e-01   2.809  0.00497 ** 
+## duration              5.520e-03  3.233e-04  17.074  < 2e-16 ***
+## campaign             -1.163e-01  5.795e-02  -2.006  0.04483 *  
+## pdays0                1.924e+01  2.400e+03   0.008  0.99360    
+## pdays1               -1.488e+01  1.582e+03  -0.009  0.99250    
+## pdays10               2.980e+00  1.532e+00   1.944  0.05184 .  
+## pdays11              -1.286e+01  2.400e+03  -0.005  0.99572    
+## pdays12               4.189e+00  2.743e+00   1.527  0.12679    
+## pdays13              -1.541e+01  1.482e+03  -0.010  0.99170    
+## pdays14              -1.621e+01  2.400e+03  -0.007  0.99461    
+## pdays15              -1.441e+01  2.400e+03  -0.006  0.99521    
+## pdays16              -1.481e+01  1.661e+03  -0.009  0.99288    
+## pdays17              -1.671e+01  2.400e+03  -0.007  0.99444    
+## pdays18              -7.879e-01  2.106e+00  -0.374  0.70830    
+## pdays19               1.721e+01  2.400e+03   0.007  0.99428    
+## pdays2               -1.339e+01  1.534e+03  -0.009  0.99304    
+## pdays21               1.412e+01  2.400e+03   0.006  0.99530    
+## pdays3                3.870e+00  1.618e+00   2.392  0.01676 *  
+## pdays4                2.234e+00  1.763e+00   1.267  0.20525    
+## pdays5                1.747e+01  1.370e+03   0.013  0.98983    
+## pdays6                2.845e+00  1.602e+00   1.776  0.07567 .  
+## pdays7                3.293e+00  1.622e+00   2.030  0.04235 *  
+## pdays9               -5.968e-01  1.536e+00  -0.389  0.69756    
+## previous              2.673e-01  2.544e-01   1.051  0.29333    
+## poutcomenonexistent   6.251e-01  4.043e-01   1.546  0.12211    
+## poutcomesuccess      -9.209e-01  1.514e+00  -0.608  0.54308    
+## emp.var.rate         -3.072e-01  6.017e-01  -0.511  0.60964    
+## cons.price.idx        3.202e-02  1.002e+00   0.032  0.97450    
+## euribor3m             3.230e-01  4.550e-01   0.710  0.47778    
+## nr.employed          -1.437e-02  1.163e-02  -1.235  0.21693    
+## log_cons.conf.idx     9.495e-02  2.477e-01   0.383  0.70143    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1990.5  on 2870  degrees of freedom
+## Residual deviance: 1068.9  on 2799  degrees of freedom
+## AIC: 1212.9
+## 
+## Number of Fisher Scoring iterations: 15
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Making predictions on the test set
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{predictions }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model, }\AttributeTok{newdata =}\NormalTok{ test\_set, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+## prediction from a rank-deficient fit may be misleading
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Convert predictions to binary values (0 or 1) using a threshold of 0.5
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{binary\_predictions }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(predictions }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{, }\StringTok{"yes"}\NormalTok{, }\StringTok{"no"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Confusion matrix for the logisitic model
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{heart\_glm }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(}\AttributeTok{data =} \FunctionTok{as.factor}\NormalTok{(binary\_predictions), }\AttributeTok{reference =} \FunctionTok{as.factor}\NormalTok{(test\_set}\SpecialCharTok{$}\NormalTok{y), }\AttributeTok{positive =} \StringTok{"yes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{heart\_glm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   no  yes
+##        no  1064   72
+##        yes   30   63
+##                                           
+##                Accuracy : 0.917           
+##                  95% CI : (0.9002, 0.9318)
+##     No Information Rate : 0.8902          
+##     P-Value [Acc > NIR] : 0.001074        
+##                                           
+##                   Kappa : 0.5086          
+##                                           
+##  Mcnemar's Test P-Value : 4.916e-05       
+##                                           
+##             Sensitivity : 0.46667         
+##             Specificity : 0.97258         
+##          Pos Pred Value : 0.67742         
+##          Neg Pred Value : 0.93662         
+##              Prevalence : 0.10985         
+##          Detection Rate : 0.05126         
+##    Detection Prevalence : 0.07567         
+##       Balanced Accuracy : 0.71962         
+##                                           
+##        'Positive' Class : yes             
+## 
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  ROC construction using probabilities
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(pROC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Type 'citation("pROC")' for a citation.
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'pROC'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     cov, smooth, var
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{roc\_GLM }\OtherTok{\textless{}{-}} \FunctionTok{roc}\NormalTok{(test\_set}\SpecialCharTok{$}\NormalTok{y, predictions)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Setting levels: control = no, case = yes
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls < cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(roc\_GLM)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## roc.default(response = test_set$y, predictor = predictions)
+## 
+## Data: predictions in 1094 controls (test_set$y no) < 135 cases (test_set$y yes).
+## Area under the curve: 0.9091
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(roc\_GLM)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-60-1.pdf}
+
+\hypertarget{decision-tree}{%
+\subsubsection{Decision tree}\label{decision-tree}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rpart)}
+\FunctionTok{library}\NormalTok{(rpart.plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{decision\_trees\_mm }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ train\_set, }\AttributeTok{method =} \StringTok{"class"}\NormalTok{)}
+
+\NormalTok{predict\_decisiontrees }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(decision\_trees\_mm, }\AttributeTok{newdata =}\NormalTok{ test\_set, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"class"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Confusion matrix for the decision tree model
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mm\_DecisionTree }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(}\AttributeTok{data =} \FunctionTok{as.factor}\NormalTok{(predict\_decisiontrees), }\AttributeTok{reference =} \FunctionTok{as.factor}\NormalTok{(test\_set}\SpecialCharTok{$}\NormalTok{y), }\AttributeTok{positive =} \StringTok{"yes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rpart.plot}\NormalTok{(decision\_trees\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-64-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  Observation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The model considered duration for constructing the root node
+
+    \begin{itemize}
+    \tightlist
+    \item
+      to get a yes at 2\% rate
+
+      \begin{itemize}
+      \tightlist
+      \item
+        duration is less than 807
+      \item
+        nr.employed at more than 5088
+      \item
+        pdays in within the 1\textsuperscript{st} day or between 9 and
+        17 days after the client was last contacted from a previous
+        campaign
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  Decision tree model's confusion matrix
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mm\_DecisionTree}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   no  yes
+##        no  1053   73
+##        yes   41   62
+##                                           
+##                Accuracy : 0.9072          
+##                  95% CI : (0.8896, 0.9229)
+##     No Information Rate : 0.8902          
+##     P-Value [Acc > NIR] : 0.028569        
+##                                           
+##                   Kappa : 0.4707          
+##                                           
+##  Mcnemar's Test P-Value : 0.003691        
+##                                           
+##             Sensitivity : 0.45926         
+##             Specificity : 0.96252         
+##          Pos Pred Value : 0.60194         
+##          Neg Pred Value : 0.93517         
+##              Prevalence : 0.10985         
+##          Detection Rate : 0.05045         
+##    Detection Prevalence : 0.08381         
+##       Balanced Accuracy : 0.71089         
+##                                           
+##        'Positive' Class : yes             
+## 
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Building the ROC for the decision tree
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{decision\_tree.preds }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(decision\_trees\_mm, test\_set, }\AttributeTok{type=}\StringTok{"prob"}\NormalTok{)[, }\DecValTok{2}\NormalTok{]}
+\NormalTok{decision\_tree }\OtherTok{\textless{}{-}} \FunctionTok{roc}\NormalTok{(test\_set}\SpecialCharTok{$}\NormalTok{y, decision\_tree.preds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Setting levels: control = no, case = yes
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls < cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(decision\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## roc.default(response = test_set$y, predictor = decision_tree.preds)
+## 
+## Data: decision_tree.preds in 1094 controls (test_set$y no) < 135 cases (test_set$y yes).
+## Area under the curve: 0.8459
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(decision\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Descriptives_Visualisation_files/figure-latex/unnamed-chunk-66-1.pdf}
+
+\hypertarget{conclusion.}{%
+\subsubsection{Conclusion.}\label{conclusion.}}
+
+\begin{itemize}
+\item
+  AUC is used to compare the performance of the two classifiers. Rahul
+  (2019) suggests the AUC as the best statistic to support the bank's
+  telemarketing campaigns in our scenario of the MMA Marketing campaign.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Logisitic model
+
+    \begin{itemize}
+    \tightlist
+    \item
+      AUC = 0.9101
+    \end{itemize}
+  \item
+    Decision tree
+
+    \begin{itemize}
+    \tightlist
+    \item
+      AUC = 0.8459
+    \end{itemize}
+  \end{itemize}
+\item
+  Both models have close values, however the logistic model performed
+  better at predicting the outcome of a phone call to sell long-term
+  bank deposits (area under the curve: 0.9101 vs.~0.8459) than the
+  decision tree.
+\end{itemize}
+
+\hypertarget{references}{%
+\paragraph{References:}\label{references}}
+
+\begin{itemize}
+\item
+  Mike, Y. (2021) A Complete Guide to Box Plots. CHARTIO. Available
+  from: \url{https://chartio.com/learn/charts/box-plot-complete-guide/}
+  {[}Accessed on 27 May 2023{]}
+\item
+  Indratmo, L., Joyce, B., Ben, D. (2014) The efficacy of stacked bar
+  charts in supporting single attribute and overall-attribute
+  comparisons, Science Direct. Available from:
+  \url{https://www.sciencedirect.com/science/article/pii/S2468502X18300287}
+  {[}Accessed on 18 June 2023{]}
+\item
+  Satyam, K. (2020) 7 Ways to Handle Missing Values in Machine Learning.
+  Towards Data Science Available from:
+  \url{https://towardsdatascience.com/7-ways-to-handle-missing-values-in-machine-learning-1a6326adf79e/}
+  {[}Accessed on 20 June 2023{]}
+\item
+  Tejashree, N. (2022) How to deal with Missing Values in Machine
+  Learning. Geek Culture Available from:
+  \url{https://medium.com/geekculture/how-to-deal-with-missing-values-in-machine-learning-98e47f025b9c/}
+  {[}Accessed on 22 June 2023{]}
+\item
+  Rick, W. (2011) Log transformations: How to handle negative data
+  values? sas Blogs Available from:
+  \url{https://blogs.sas.com/content/iml/2011/04/27/log-transformations-how-to-handle-negative-data-values.html/}
+  {[}Accessed on 15 June 2023{]}
+\item
+  Giuseppe, M. (2022) Correlation Matrix, Demystified. Correlation
+  matrix: what is, how is it built and what is it used for Towards Data
+  Science Available from:
+  \url{https://towardsdatascience.com/correlation-matrix-demystified-3ae3405c86c1}
+  {[}Accessed on 19 June 2023{]}
+\item
+  Rahul, A. (2019) The 5 Classification Evaluation metrics every Data
+  Scientist must know Available from:
+  \url{https://towardsdatascience.com/the-5-classification-evaluation-metrics-you-must-know-aa97784ff226}
+  {[}Accessed on 20 June 2023{]}
+\end{itemize}
+
+\end{document}

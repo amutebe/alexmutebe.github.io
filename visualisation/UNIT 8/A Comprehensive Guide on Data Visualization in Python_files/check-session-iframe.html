@@ -1,0 +1,74 @@
+
+<!-- saved from url=(0058)https://id.analyticsvidhya.com/openid/check-session-iframe -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>OP Iframe</title>
+<script src="./sha256.min.43e334028790.js.download"></script>
+<script language="JavaScript" type="text/javascript">
+            window.addEventListener("message", receiveMessage, false);
+
+            function receiveMessage(e) {
+                if (!e.data || typeof e.data != 'string' || e.data == 'error') {
+                    return;
+                }
+
+                var status;
+                try {
+                    var clientId = e.data.split(' ')[0];
+                    var sessionState = e.data.split(' ')[1];
+                    var salt = sessionState.split('.')[1];
+
+                    var browserState = getOpBrowserState();
+
+                    var sessionStateCalculated = sha256(clientId + ' ' + e.origin + ' ' + browserState + ' ' + salt) + '.' + salt;
+
+                    if (sessionState == sessionStateCalculated) {
+                        status = 'unchanged';
+                    } else {
+                        status = 'changed';
+                    }
+                } catch(err) {
+                    status = 'error';
+                }
+                e.source.postMessage(status, e.origin);
+            };
+
+            function getOpBrowserState() {
+                var theName = 'op_browser_state=';
+                var theCookie = document.cookie + ';';
+                var start = theCookie.indexOf(theName);
+                if (start != -1)
+                {
+                    var end = theCookie.indexOf(';', start);
+                    return unescape(theCookie.substring(start + theName.length, end));
+                }
+                throw new Error('We couldn\'t find the "op_browser_state" cookie.');
+            }
+        </script>
+</head>
+<body data-new-gr-c-s-check-loaded="14.1113.0" data-gr-ext-installed="">
+OpenID Connect Session Management OP Iframe.
+<script defer="" src="./v52afc6f149f6479b8c77fa569edb01181681764108816" integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==" data-cf-beacon="{&quot;rayId&quot;:&quot;7e0d4038a8840556&quot;,&quot;token&quot;:&quot;6dc69ea2ec65420db26006e7a2ffc709&quot;,&quot;version&quot;:&quot;2023.4.0&quot;,&quot;si&quot;:100}" crossorigin="anonymous"></script>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+  div.grammarly-desktop-integration {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+
+  div.grammarly-desktop-integration:before {
+    content: attr(data-content);
+  }
+</style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;limited&quot;,&quot;isActive&quot;:false,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

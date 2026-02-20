@@ -1,0 +1,6 @@
+([baseline_arm_1][ultdate]!="" or [baseline_arm_1][usut]!="" or 
+[baseline_arm_1][uslip]!="" or [baseline_arm_1][uslis]!="" or 
+[baseline_arm_1][uslls]="1" or [baseline_arm_1][usrls]!="" or 
+[baseline_arm_1][itoi_347de6]!="" or [baseline_arm_1][otoo_664ae4]!="" or 
+[baseline_arm_1][itoi2_a9c2a4]!="" or [baseline_arm_1][otoo2_90fbad]!="" or 
+[baseline_arm_1][uslpd]!="" or [baseline_arm_1][uslcv]!="" or [baseline_arm_1][uslac]!="" or [baseline_arm_1][ussl]!="" or [baseline_arm_1][usef]!="")
